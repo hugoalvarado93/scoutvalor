@@ -385,21 +385,7 @@ LINE 6:     WHERE g.season >= (SELECT MAX(season) - 3 FROM games)
   "archivo": "status.json",
   "resultados": 0,
   "errores": [],
-  "cuenta": {
-    "account": {
-      "firstname": "Hugo",
-      "lastname": "Alvarado",
-      "email": "hugiox@gmail.com"
-    },
-    "subscription": {
-      "plan": "Free",
-      "end": "2027-10-29T00:00:00+00:00",
-      "active": true
-    },
-    "requests": {
-      "current": 0,
-      "limit_day": 100
-    }
-  }
+  "plan": "Free",
+  "limite_diario": 100
 }
 ```

@@ -95,7 +95,7 @@ def transfermarkt():
            COUNT(DISTINCT l.game_id) AS partidos_con_alineacion
     FROM games g
     LEFT JOIN game_lineups l ON l.game_id = g.game_id
-    WHERE g.season >= (SELECT MAX(season) - 3 FROM games)
+    WHERE TRY_CAST(g.season AS INTEGER) >= (SELECT MAX(TRY_CAST(season AS INTEGER)) - 3 FROM games)
       AND g.competition_type = 'domestic_league'
     GROUP BY 1,2 ORDER BY 1,2
     """
@@ -163,7 +163,11 @@ def api_football():
         d = json.loads(f.read_text(encoding="utf-8"))
         resumen = {"archivo": f.name, "resultados": d.get("results"), "errores": d.get("errors")}
         if f.stem == "status":
-            resumen["cuenta"] = d.get("response")
+            # Solo plan y limites: nunca publicar datos personales de la cuenta
+            cuenta = d.get("response") or {}
+            if isinstance(cuenta, dict):
+                resumen["plan"] = (cuenta.get("subscription") or {}).get("plan")
+                resumen["limite_diario"] = (cuenta.get("requests") or {}).get("limit_day")
         if f.stem in ("liga_mx", "premier") and d.get("response"):
             temporadas = d["response"][0].get("seasons", [])
             resumen["temporadas"] = [

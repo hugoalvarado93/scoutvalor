@@ -107,6 +107,8 @@ def api_football():
             r = requests.get(API_FOOTBALL + ruta, params=params,
                              headers={"x-apisports-key": key}, timeout=60)
             datos = r.json()
+            if nombre == "status" and isinstance(datos.get("response"), dict):
+                datos["response"].pop("account", None)  # no guardar datos personales
             (destino / f"{nombre}.json").write_text(json.dumps(datos, ensure_ascii=False, indent=2), encoding="utf-8")
             errores = datos.get("errors")
             print(f"  {nombre}: HTTP {r.status_code}, resultados={datos.get('results')}, errores={errores or 'ninguno'}")
