@@ -153,6 +153,12 @@ def puntuar(pares: pd.DataFrame, sim: Similitud) -> pd.DataFrame:
     p["s_altura"] = np.where(d.isna(), 0.5, np.clip(1 - (d - 2) / 6, 0, 1))
     p["puntaje"] = (PESOS["nombre"] * p.s_nombre + PESOS["nacionalidad"] * p.s_pais
                     + PESOS["club"] * p.s_club + PESOS["estatura"] * p.s_altura)
+    # Nombre compuesto cuyo apellido no aparece en el otro registro: solo coincide el nombre de pila
+    # (p. ej. "Luis Vega" vs "Luis Espinoza"). Los apodos de una sola palabra (Savinho, Kuni) no se penalizan.
+    apellido_tm = p.corto_n_tm.str.split().str[-1].fillna("")
+    multi = p.corto_n_tm.str.split().str.len().fillna(0) >= 2
+    falta_apellido = [a not in set(b.split()) and a not in b for a, b in zip(apellido_tm, p.nombre_n_af)]
+    p.loc[multi & pd.Series(falta_apellido, index=p.index) & (p.s_nombre < 0.6), "puntaje"] = 0.0
     return p
 
 
