@@ -76,8 +76,8 @@
 | RO1    | superliga                     |         630 |        75.6 |           53.8 |              99.5 |              100 |                287 |
 | SA1    | saudi-pro-league              |         616 |        82.8 |           57.6 |              96.9 |              100 |               1025 |
 | PL1    | pko-bp-ekstraklasa            |         615 |        82.4 |           87.3 |             100   |              100 |                422 |
-| TS1    | chance-liga                   |         615 |        76.9 |           56.4 |              99.8 |              100 |                470 |
 | PO1    | liga-portugal                 |         615 |        87.8 |           89.8 |              99.8 |              100 |               1955 |
+| TS1    | chance-liga                   |         615 |        76.9 |           56.4 |              99.8 |              100 |                470 |
 | L1     | bundesliga                    |         610 |        92.1 |           80   |             100   |              100 |               5167 |
 | UKR1   | premier-liga                  |         610 |        79.5 |           85.9 |              99.7 |              100 |                519 |
 | BE1    | jupiler-pro-league            |         567 |        89.4 |           87.1 |              98.9 |              100 |               1332 |
@@ -297,10 +297,8 @@
 ```json
 {
   "archivo": "jugadores_liga_mx_2025.json",
-  "resultados": 0,
-  "errores": {
-    "plan": "Free plans do not have access to this season, try from 2022 to 2024."
-  }
+  "resultados": 20,
+  "errores": []
 }
 ```
 ```json
@@ -374,7 +372,7 @@
   "archivo": "status.json",
   "resultados": 0,
   "errores": [],
-  "plan": "Free",
-  "limite_diario": 100
+  "plan": "Pro",
+  "limite_diario": 7500
 }
 ```
