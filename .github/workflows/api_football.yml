@@ -15,6 +15,10 @@ on:
   schedule:
     - cron: "17 9 * * 1"  # lunes 3:17 am Monterrey: refresco semanal de la temporada actual
 
+permissions:
+  contents: write
+  actions: read
+
 concurrency:
   group: api-football
   cancel-in-progress: false
@@ -50,13 +54,13 @@ jobs:
             python scripts/10_api_football_ingesta.py --fases "${{ inputs.fases }}" --temporadas "${{ inputs.temporadas }}" --presupuesto "${{ inputs.presupuesto }}"
           fi
 
-      - name: Resumen
+      - name: Resumen al repositorio
         run: |
-          python - <<'EOF'
-          import pandas as pd, glob
-          for f in sorted(glob.glob("data/api_football/parquet/*.parquet")):
-              df = pd.read_parquet(f); print(f, len(df), "filas")
-          EOF
+          python scripts/11_resumen_api_football.py
+          git config user.name "scoutvalor-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/reports/
+          git diff --cached --quiet || (git commit -m "Actualiza resumen API-Football [skip ci]" && git pull --rebase -q && git push)
 
       - uses: actions/upload-artifact@v4
         with:

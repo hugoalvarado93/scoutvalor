@@ -3,6 +3,9 @@ name: Infraestructura Cloudflare
 on:
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   d1:
     runs-on: ubuntu-latest
@@ -10,6 +13,7 @@ jobs:
       CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
       CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
     steps:
+      - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
@@ -23,3 +27,11 @@ jobs:
             npx --yes wrangler@4 d1 create scoutvalor
           fi
           npx --yes wrangler@4 d1 list
+      - name: Guardar estado en el repositorio
+        run: |
+          mkdir -p data/reports
+          { echo "# Infraestructura"; echo; echo '```'; npx --yes wrangler@4 d1 list; echo '```'; } > data/reports/infra.md
+          git config user.name "scoutvalor-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/reports/
+          git diff --cached --quiet || (git commit -m "Actualiza estado de infraestructura [skip ci]" && git pull --rebase -q && git push)
