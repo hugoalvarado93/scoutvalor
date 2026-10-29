@@ -46,6 +46,7 @@ jobs:
           cp -r muestras /tmp/muestras
           git checkout --orphan muestras-nueva
           git rm -rfq .
+          git clean -fdxq
           cp -r /tmp/muestras/. .
           echo "Muestras reducidas para desarrollo. Se regeneran automaticamente." > README.md
           git add -A
