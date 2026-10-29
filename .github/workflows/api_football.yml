@@ -11,7 +11,7 @@ on:
         default: "2023,2024,2025,2026"
       presupuesto:
         description: "Maximo de consultas en esta corrida"
-        default: "6500"
+        default: "7000"
   schedule:
     - cron: "17 9 * * 1"  # lunes 3:17 am Monterrey: refresco semanal de la temporada actual
 
@@ -48,7 +48,7 @@ jobs:
           API_FOOTBALL_KEY: ${{ secrets.API_FOOTBALL_KEY }}
         run: |
           if [ "${{ github.event_name }}" = "schedule" ]; then
-            rm -f data/api_football/raw/jugadores/*_2026_* data/api_football/raw/jugadores/*_2025_*
+            rm -f data/api_football/raw/jugadores/*_2026.completo data/api_football/raw/jugadores/*_2025.completo
             python scripts/10_api_football_ingesta.py --fases ligas,jugadores,plantillas,traspasos --temporadas 2025,2026
           else
             python scripts/10_api_football_ingesta.py --fases "${{ inputs.fases }}" --temporadas "${{ inputs.temporadas }}" --presupuesto "${{ inputs.presupuesto }}"

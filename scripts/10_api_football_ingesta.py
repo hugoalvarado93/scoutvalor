@@ -189,7 +189,7 @@ def fase_jugadores(c: Cliente, obj: pd.DataFrame):
     print(f"\n[jugadores] {len(obj)} liga-temporadas")
     for _, o in obj.iterrows():
         nombre = f"{o.tm_liga}_{o.temporada}"
-        marca = SALIDA / "raw" / "jugadores" / f"{nombre}_p1.json.gz"
+        marca = SALIDA / "raw" / "jugadores" / f"{nombre}.completo"
         if marca.exists():
             continue
         filas, pagina, total = [], 1, 1
@@ -202,6 +202,7 @@ def fase_jugadores(c: Cliente, obj: pd.DataFrame):
             pagina += 1
         print(f"  {nombre}: {total} paginas, {len(filas):,} filas (consultas usadas {c.usadas})")
         guardar_parquet("jugadores_temporada", filas)
+        marca.write_text(str(total))
 
 
 def fase_plantillas(c: Cliente, actuales: pd.DataFrame):
