@@ -1,0 +1,25 @@
+name: Infraestructura Cloudflare
+
+on:
+  workflow_dispatch:
+
+jobs:
+  d1:
+    runs-on: ubuntu-latest
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Verificar token
+        run: npx --yes wrangler@4 whoami
+      - name: Crear base D1 (si no existe)
+        run: |
+          if npx --yes wrangler@4 d1 list --json | grep -q '"name": "scoutvalor"'; then
+            echo "La base scoutvalor ya existe"
+          else
+            npx --yes wrangler@4 d1 create scoutvalor
+          fi
+          npx --yes wrangler@4 d1 list

@@ -1,0 +1,65 @@
+name: Ingesta API-Football
+
+on:
+  workflow_dispatch:
+    inputs:
+      fases:
+        description: "Fases separadas por coma"
+        default: "ligas,jugadores,plantillas,traspasos"
+      temporadas:
+        description: "Temporadas para estadisticas de jugador"
+        default: "2023,2024,2025,2026"
+      presupuesto:
+        description: "Maximo de consultas en esta corrida"
+        default: "6500"
+  schedule:
+    - cron: "17 9 * * 1"  # lunes 3:17 am Monterrey: refresco semanal de la temporada actual
+
+concurrency:
+  group: api-football
+  cancel-in-progress: false
+
+jobs:
+  ingesta:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -r requirements.txt
+
+      - name: Recuperar datos previos
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          RUN=$(gh run list -w api_football.yml -s success -L 1 --json databaseId -q '.[0].databaseId')
+          if [ -n "$RUN" ]; then gh run download "$RUN" -n api-football -D data/api_football; fi
+
+      - name: Descargar
+        env:
+          API_FOOTBALL_KEY: ${{ secrets.API_FOOTBALL_KEY }}
+        run: |
+          if [ "${{ github.event_name }}" = "schedule" ]; then
+            rm -f data/api_football/raw/jugadores/*_2026_* data/api_football/raw/jugadores/*_2025_*
+            python scripts/10_api_football_ingesta.py --fases ligas,jugadores,plantillas,traspasos --temporadas 2025,2026
+          else
+            python scripts/10_api_football_ingesta.py --fases "${{ inputs.fases }}" --temporadas "${{ inputs.temporadas }}" --presupuesto "${{ inputs.presupuesto }}"
+          fi
+
+      - name: Resumen
+        run: |
+          python - <<'EOF'
+          import pandas as pd, glob
+          for f in sorted(glob.glob("data/api_football/parquet/*.parquet")):
+              df = pd.read_parquet(f); print(f, len(df), "filas")
+          EOF
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: api-football
+          path: data/api_football
+          retention-days: 90
