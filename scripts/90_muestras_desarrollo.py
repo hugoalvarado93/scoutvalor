@@ -1,7 +1,7 @@
 """
 Genera muestras reducidas para desarrollo local (rama `muestras`).
 
-Contenido (parquet comprimido):
+Contenido (CSV gzip):
   tm_*            Transfermarkt completo para jugadores/clubes/ligas; historial filtrado a ligas muestra
   af_*            API-Football (si existe) filtrado a ligas muestra
 
@@ -25,8 +25,9 @@ LIGAS_AF = (262, 128, 39, 94)
 
 
 def escribir(nombre: str, df: pd.DataFrame):
-    p = OUT / f"{nombre}.parquet"
-    df.to_parquet(p, index=False, compression="zstd")
+    # CSV comprimido: legible sin pyarrow en cualquier entorno
+    p = OUT / f"{nombre}.csv.gz"
+    df.to_csv(p, index=False, compression="gzip")
     print(f"{nombre}: {len(df):,} filas, {p.stat().st_size/1e6:.1f} MB")
 
 
@@ -56,5 +57,5 @@ if AF.exists():
             df = df[df.api_equipo.isin(eq[eq.api_liga.isin(LIGAS_AF)].api_equipo)] if f.stem == "plantillas_actuales" else df
         escribir(f"af_{f.stem}", df)
 
-tot = sum(p.stat().st_size for p in OUT.glob("*.parquet")) / 1e6
+tot = sum(p.stat().st_size for p in OUT.glob("*.csv.gz")) / 1e6
 print(f"Total: {tot:.1f} MB")
