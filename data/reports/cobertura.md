@@ -78,8 +78,8 @@
 | PL1    | pko-bp-ekstraklasa            |         615 |        82.4 |           87.3 |             100   |              100 |                422 |
 | TS1    | chance-liga                   |         615 |        76.9 |           56.4 |              99.8 |              100 |                470 |
 | PO1    | liga-portugal                 |         615 |        87.8 |           89.8 |              99.8 |              100 |               1955 |
-| UKR1   | premier-liga                  |         610 |        79.5 |           85.9 |              99.7 |              100 |                519 |
 | L1     | bundesliga                    |         610 |        92.1 |           80   |             100   |              100 |               5167 |
+| UKR1   | premier-liga                  |         610 |        79.5 |           85.9 |              99.7 |              100 |                519 |
 | BE1    | jupiler-pro-league            |         567 |        89.4 |           87.1 |              98.9 |              100 |               1332 |
 | RU1    | premier-liga                  |         560 |        87.1 |           91.6 |             100   |              100 |               1039 |
 | COL1   | nan                           |         550 |        92.7 |           61.3 |              97.6 |              100 |                197 |
@@ -107,51 +107,40 @@
 
 ## Transfermarkt: partidos y alineaciones por liga y temporada (ultimas 4)
 
-Error: Binder Error: No function matches the given name and argument types '-(VARCHAR, INTEGER_LITERAL)'. You might need to add explicit type casts.
-	Candidate functions:
-	"-"(x TINYINT, /) -> TINYINT
-	"-"("left" TINYINT, "right" TINYINT, /) -> TINYINT
-	"-"(x SMALLINT, /) -> SMALLINT
-	"-"("left" SMALLINT, "right" SMALLINT, /) -> SMALLINT
-	"-"(x INTEGER, /) -> INTEGER
-	"-"("left" INTEGER, "right" INTEGER, /) -> INTEGER
-	"-"(x BIGINT, /) -> BIGINT
-	"-"("left" BIGINT, "right" BIGINT, /) -> BIGINT
-	"-"(x HUGEINT, /) -> HUGEINT
-	"-"("left" HUGEINT, "right" HUGEINT, /) -> HUGEINT
-	"-"(x FLOAT, /) -> FLOAT
-	"-"("left" FLOAT, "right" FLOAT, /) -> FLOAT
-	"-"(x DOUBLE, /) -> DOUBLE
-	"-"("left" DOUBLE, "right" DOUBLE, /) -> DOUBLE
-	"-"(x DECIMAL, /) -> DECIMAL
-	"-"("left" DECIMAL, "right" DECIMAL, /) -> DECIMAL
-	"-"(x UTINYINT, /) -> UTINYINT
-	"-"("left" UTINYINT, "right" UTINYINT, /) -> UTINYINT
-	"-"(x USMALLINT, /) -> USMALLINT
-	"-"("left" USMALLINT, "right" USMALLINT, /) -> USMALLINT
-	"-"(x UINTEGER, /) -> UINTEGER
-	"-"("left" UINTEGER, "right" UINTEGER, /) -> UINTEGER
-	"-"(x UBIGINT, /) -> UBIGINT
-	"-"("left" UBIGINT, "right" UBIGINT, /) -> UBIGINT
-	"-"(x UHUGEINT, /) -> UHUGEINT
-	"-"("left" UHUGEINT, "right" UHUGEINT, /) -> UHUGEINT
-	"-"(x BIGNUM, /) -> BIGNUM
-	"-"("left" BIGNUM, "right" BIGNUM, /) -> BIGNUM
-	"-"("left" DATE, "right" DATE, /) -> BIGINT
-	"-"("left" DATE, "right" INTEGER, /) -> DATE
-	"-"("left" TIMESTAMP, "right" TIMESTAMP, /) -> INTERVAL
-	"-"("left" INTERVAL, "right" INTERVAL, /) -> INTERVAL
-	"-"("left" DATE, "right" INTERVAL, /) -> TIMESTAMP
-	"-"("left" TIME, "right" INTERVAL, /) -> TIME
-	"-"("left" TIMESTAMP, "right" INTERVAL, /) -> TIMESTAMP
-	"-"("left" TIME WITH TIME ZONE, "right" INTERVAL, /) -> TIME WITH TIME ZONE
-	"-"(x INTERVAL, /) -> INTERVAL
-	"-"("left" TIMESTAMP WITH TIME ZONE, "right" INTERVAL, /) -> TIMESTAMP WITH TIME ZONE
-	"-"("left" TIMESTAMP WITH TIME ZONE, "right" TIMESTAMP WITH TIME ZONE, /) -> INTERVAL
+| ('liga', '')   |   ('partidos', '2022') |   ('partidos', '2023') |   ('partidos', '2024') |   ('partidos', '2025') |   ('partidos_con_alineacion', '2022') |   ('partidos_con_alineacion', '2023') |   ('partidos_con_alineacion', '2024') |   ('partidos_con_alineacion', '2025') |
+|:---------------|-----------------------:|-----------------------:|-----------------------:|-----------------------:|--------------------------------------:|--------------------------------------:|--------------------------------------:|--------------------------------------:|
+| A1             |                    nan |                    nan |                    164 |                    192 |                                   nan |                                   nan |                                   124 |                                   192 |
+| ARG1           |                    nan |                    nan |                    178 |                    240 |                                   nan |                                   nan |                                   128 |                                   240 |
+| AUS1           |                    nan |                    nan |                    169 |                    156 |                                   nan |                                   nan |                                   169 |                                   156 |
+| BE1            |                    306 |                    240 |                    240 |                    240 |                                   306 |                                   240 |                                   240 |                                   240 |
+| BRA1           |                    nan |                    nan |                    380 |                    177 |                                   nan |                                   nan |                                   380 |                                   177 |
+| C1             |                    nan |                    nan |                    202 |                    228 |                                   nan |                                   nan |                                   158 |                                   228 |
+| DK1            |                    132 |                    132 |                    132 |                    132 |                                   132 |                                   132 |                                   132 |                                   132 |
+| ES1            |                    380 |                    380 |                    380 |                    380 |                                   380 |                                   380 |                                   380 |                                   380 |
+| FR1            |                    380 |                    306 |                    306 |                    306 |                                   378 |                                   306 |                                   306 |                                   305 |
+| GB1            |                    380 |                    380 |                    380 |                    380 |                                   380 |                                   380 |                                   380 |                                   380 |
+| GR1            |                    182 |                    182 |                    182 |                    182 |                                   182 |                                   182 |                                   182 |                                   182 |
+| IT1            |                    380 |                    380 |                    380 |                    380 |                                   380 |                                   380 |                                   380 |                                   379 |
+| JAP1           |                    nan |                    nan |                    296 |                    nan |                                   nan |                                   nan |                                   202 |                                   nan |
+| KR1            |                    nan |                    nan |                    168 |                    180 |                                   nan |                                   nan |                                   125 |                                   180 |
+| L1             |                    306 |                    306 |                    306 |                    306 |                                   306 |                                   306 |                                   306 |                                   306 |
+| MEX1           |                    nan |                    nan |                     88 |                    153 |                                   nan |                                   nan |                                    59 |                                   153 |
+| MLS1           |                    nan |                    nan |                    509 |                    218 |                                   nan |                                   nan |                                   357 |                                   217 |
+| NL1            |                    306 |                    306 |                    306 |                    306 |                                   306 |                                   306 |                                   306 |                                   306 |
+| NO1            |                    nan |                    nan |                    240 |                     89 |                                   nan |                                   nan |                                   169 |                                    89 |
+| PL1            |                    nan |                    nan |                    306 |                    306 |                                   nan |                                   nan |                                   306 |                                   305 |
+| PO1            |                    306 |                    306 |                    306 |                    306 |                                   304 |                                   306 |                                   306 |                                   306 |
+| RO1            |                    nan |                    nan |                    240 |                    240 |                                   nan |                                   nan |                                   170 |                                   240 |
+| RSK1           |                    nan |                    nan |                    135 |                     96 |                                   nan |                                   nan |                                    97 |                                    95 |
+| RU1            |                    240 |                    240 |                    240 |                    240 |                                   240 |                                   240 |                                   240 |                                   239 |
+| SA1            |                    nan |                    nan |                    306 |                    306 |                                   nan |                                   nan |                                   306 |                                   306 |
+| SC1            |                    198 |                    198 |                    198 |                    198 |                                   198 |                                   198 |                                   198 |                                   198 |
+| SE1            |                    nan |                    nan |                    240 |                     89 |                                   nan |                                   nan |                                   155 |                                    88 |
+| SER1           |                    nan |                    nan |                    240 |                    240 |                                   nan |                                   nan |                                   240 |                                   240 |
+| TR1            |                    342 |                    380 |                    342 |                    306 |                                   313 |                                   380 |                                   342 |                                   305 |
+| TS1            |                    nan |                    nan |                    240 |                    240 |                                   nan |                                   nan |                                   240 |                                   240 |
+| UKR1           |                    240 |                    240 |                    240 |                    240 |                                   240 |                                   240 |                                   240 |                                   239 |
 
-
-LINE 6:     WHERE g.season >= (SELECT MAX(season) - 3 FROM games)
-                                                       ^
 
 ## Transfermarkt: traspasos con monto por temporada
 
