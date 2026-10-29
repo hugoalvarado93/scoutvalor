@@ -75,9 +75,9 @@
 | SER1   | super-liga-srbije             |         636 |        74.5 |           67   |             100   |              100 |                377 |
 | RO1    | superliga                     |         630 |        75.6 |           53.8 |              99.5 |              100 |                287 |
 | SA1    | saudi-pro-league              |         616 |        82.8 |           57.6 |              96.9 |              100 |               1025 |
+| PL1    | pko-bp-ekstraklasa            |         615 |        82.4 |           87.3 |             100   |              100 |                422 |
 | TS1    | chance-liga                   |         615 |        76.9 |           56.4 |              99.8 |              100 |                470 |
 | PO1    | liga-portugal                 |         615 |        87.8 |           89.8 |              99.8 |              100 |               1955 |
-| PL1    | pko-bp-ekstraklasa            |         615 |        82.4 |           87.3 |             100   |              100 |                422 |
 | L1     | bundesliga                    |         610 |        92.1 |           80   |             100   |              100 |               5167 |
 | UKR1   | premier-liga                  |         610 |        79.5 |           85.9 |              99.7 |              100 |                519 |
 | BE1    | jupiler-pro-league            |         567 |        89.4 |           87.1 |              98.9 |              100 |               1332 |
@@ -264,32 +264,32 @@
 
 ## football-data.co.uk: archivos y columnas de momios
 
-| archivo       | filas                                |   temporadas |   cols_momios |
-|:--------------|:-------------------------------------|-------------:|--------------:|
-| 2526/B1.csv   | 311                                  |            1 |            48 |
-| 2526/D1.csv   | 306                                  |            1 |            48 |
-| 2526/E0.csv   | 380                                  |            1 |            48 |
-| 2526/E1.csv   | 552                                  |            1 |            48 |
-| 2526/F1.csv   | 306                                  |            1 |            48 |
-| 2526/G1.csv   | 236                                  |            1 |            48 |
-| 2526/I1.csv   | 380                                  |            1 |            48 |
-| 2526/N1.csv   | 306                                  |            1 |            48 |
-| 2526/P1.csv   | 306                                  |            1 |            48 |
-| 2526/SC0.csv  | 228                                  |            1 |            48 |
-| 2526/SP1.csv  | 380                                  |            1 |            48 |
-| 2526/T1.csv   | 306                                  |            1 |            48 |
-| extra/ARG.csv | 6444                                 |           16 |            12 |
-| extra/AUT.csv | 2698                                 |           15 |            12 |
-| extra/BRA.csv | 5639                                 |           15 |            12 |
-| DNK.csv       | error: No columns to parse from file |          nan |           nan |
-| extra/JPN.csv | 4643                                 |           15 |            12 |
-| extra/MEX.csv | 4779                                 |           15 |            12 |
-| extra/NOR.csv | 3574                                 |           15 |            12 |
-| extra/POL.csv | 4188                                 |           15 |            12 |
-| extra/RUS.csv | 3416                                 |           15 |             9 |
-| extra/SWE.csv | 3584                                 |           15 |            12 |
-| extra/SWZ.csv | 2741                                 |           15 |            12 |
-| extra/USA.csv | 6282                                 |           15 |            12 |
+| archivo       |   filas |   temporadas |   cols_momios |
+|:--------------|--------:|-------------:|--------------:|
+| 2526/B1.csv   |     311 |            1 |            48 |
+| 2526/D1.csv   |     306 |            1 |            48 |
+| 2526/E0.csv   |     380 |            1 |            48 |
+| 2526/E1.csv   |     552 |            1 |            48 |
+| 2526/F1.csv   |     306 |            1 |            48 |
+| 2526/G1.csv   |     236 |            1 |            48 |
+| 2526/I1.csv   |     380 |            1 |            48 |
+| 2526/N1.csv   |     306 |            1 |            48 |
+| 2526/P1.csv   |     306 |            1 |            48 |
+| 2526/SC0.csv  |     228 |            1 |            48 |
+| 2526/SP1.csv  |     380 |            1 |            48 |
+| 2526/T1.csv   |     306 |            1 |            48 |
+| extra/ARG.csv |    6444 |           16 |            12 |
+| extra/AUT.csv |    2698 |           15 |            12 |
+| extra/BRA.csv |    5639 |           15 |            12 |
+| extra/DNK.csv |    3024 |           15 |            12 |
+| extra/JPN.csv |    4643 |           15 |            12 |
+| extra/MEX.csv |    4779 |           15 |            12 |
+| extra/NOR.csv |    3574 |           15 |            12 |
+| extra/POL.csv |    4188 |           15 |            12 |
+| extra/RUS.csv |    3416 |           15 |             9 |
+| extra/SWE.csv |    3584 |           15 |            12 |
+| extra/SWZ.csv |    2741 |           15 |            12 |
+| extra/USA.csv |    6282 |           15 |            12 |
 
 
 ## API-Football: diagnostico
