@@ -40,9 +40,13 @@ jobs:
           gh run download "$RUN" -n api-football -D data/api_football
 
       - name: Vinculacion de jugadores
-        run: python scripts/20_vinculacion.py
+        run: |
+          mkdir -p data/reports
+          set -o pipefail
+          python scripts/20_vinculacion.py 2>&1 | tail -60 > data/reports/log_procesamiento.txt
 
       - name: Guardar reportes
+        if: always()
         run: |
           git config user.name "scoutvalor-bot"
           git config user.email "actions@users.noreply.github.com"
