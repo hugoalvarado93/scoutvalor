@@ -61,6 +61,8 @@
 | equipos             |     822 |         12 |
 | jugadores_temporada |  145761 |         53 |
 | ligas               |     644 |         12 |
+| plantillas_actuales |   25620 |          7 |
+| traspasos           |  463225 |          8 |
 
 ## Jugadores por liga y temporada
 
