@@ -1,4 +1,3 @@
-|-----------:|------------:|----------------:|
 |         72 |        1946 |            20.9 |
 |        129 |        1919 |             3.4 |
 |        128 |        1863 |            61.5 |
@@ -70,6 +69,7 @@
 | Billy van Duijl        | AZ Alkmaar                   | Centre-Back      |     21 |               1500000 |         4.5e+06  |      200 |
 | Sofus Johannesen       | FC Midtjylland               | Central Midfield |     19 |                550000 |         1.65e+06 |      200 |
 | Amando Lapage          | KVC Westerlo                 | Centre-Back      |     22 |                800000 |         2.4e+06  |      200 |
+Club actualizado por traspaso reciente: 1439 jugadores
 resumen.json: 0.00 MB
 ligas.json: 0.00 MB
 clubes.json: 0.05 MB
