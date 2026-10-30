@@ -187,7 +187,7 @@ def main():
     # ---- jugadores (formato columnar)
     act = act.merge(vinc[["player_id", "api_jugador"]], on="player_id", how="left") if len(vinc) else act.assign(api_jugador=np.nan)
     if len(valor):
-        act = act.merge(valor.drop(columns=[c for c in ["edad", "api_jugador"] if c in valor.columns]), on="player_id", how="left")
+        act = act.merge(valor.drop(columns=[c for c in valor.columns if c != "player_id" and c in act.columns]), on="player_id", how="left")
     else:
         for c in ["valor_estimado", "brecha", "elegible_radar", "minutos", "goles", "asistencias", "calificacion"]:
             act[c] = np.nan
