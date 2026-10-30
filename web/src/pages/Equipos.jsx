@@ -43,6 +43,7 @@ export default function Equipos() {
   const [perf, setPerf] = useState(null);
   const [sel, setSel] = useState(10);
   const [pesos, setPesos] = useState(PESOS0);
+  const [todosPresupuestos, setTodosPresupuestos] = useState(false);
 
   useEffect(() => {
     cargarContexto().then(setCtx);
@@ -76,6 +77,7 @@ export default function Equipos() {
     const lista = [];
     for (const j of ctx.jugadores) {
       if (!permitidos.has(j.p) || Number(j.cl) === clubId || !perf[j.id] || !j.v || (j.e || 99) > 32) continue;
+      if (!todosPresupuestos && ref > 0 && j.v > 2.5 * ref) continue;
       const pf = perf[j.id];
       let sim;
       if (zt) {
@@ -90,7 +92,7 @@ export default function Equipos() {
       lista.push({ j, sim, p, adapt, aseq, cal: pf.q, total });
     }
     return lista.sort((a, b) => b.total - a.total).slice(0, 8);
-  }, [ctx, perf, slot, titular, clubId, pesos]);
+  }, [ctx, perf, slot, titular, clubId, pesos, todosPresupuestos]);
 
   if (!ctx || !xi) return <main className="contenedor"><div className="cargando">{t('cargando')}</div></main>;
 
@@ -181,6 +183,10 @@ export default function Equipos() {
                   </label>
                 ))}
               </fieldset>
+              <label className="casilla" style={{ marginTop: 12 }}>
+                <input type="checkbox" checked={todosPresupuestos} onChange={(e) => setTodosPresupuestos(e.target.checked)} />
+                {t('incluirFuera', { v: dinero(2.5 * (ctx.clubesCtx[clubId]?.ref || 0)) })}
+              </label>
             </div>
 
             {!perf ? <div className="tarjeta cargando">{t('cargando')}</div> : candidatos.map((c, i) => {
