@@ -97,8 +97,11 @@ def _def(o):
 
 
 def limpio(v):
-    if v is None or (isinstance(v, float) and np.isnan(v)) or v is pd.NaT:
-        return None
+    try:
+        if v is None or pd.isna(v):
+            return None
+    except (TypeError, ValueError):
+        pass
     if isinstance(v, (np.integer,)):
         return int(v)
     if isinstance(v, (np.floating,)):
