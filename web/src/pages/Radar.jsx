@@ -300,8 +300,8 @@ export default function Radar() {
             <div className="tarjeta relleno" style={{ flex: '1 1 260px' }}>
               <h3 className="tarjeta-t" style={{ fontSize: 16, margin: '0 0 10px' }}>{t('fuentes')}</h3>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
-                <span className="etiqueta" style={{ background: '#fff', border: '1px solid var(--linea)' }}>Transfermarkt</span>
-                <span className="etiqueta" style={{ background: '#fff', border: '1px solid var(--linea)' }}>API-Football</span>
+                <span className="etiqueta" style={{ background: 'var(--superficie)', border: '1px solid var(--linea)' }}>Transfermarkt</span>
+                <span className="etiqueta" style={{ background: 'var(--superficie)', border: '1px solid var(--linea)' }}>API-Football</span>
               </div>
             </div>
           </div>

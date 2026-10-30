@@ -1,5 +1,5 @@
 import { NavLink, Link, useNavigate } from 'react-router-dom';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useIdioma } from '../i18n.jsx';
 import { cargarJugadores, cargar, dinero } from '../datos.js';
 import { Foto } from './Insignias.jsx';
@@ -53,6 +53,31 @@ function Buscador() {
   );
 }
 
+function leerTema() {
+  try { const g = localStorage.getItem('sv-tema'); if (g) return g; } catch { /* sin almacenamiento */ }
+  return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'oscuro' : 'claro';
+}
+
+function BotonTema() {
+  const { t } = useIdioma();
+  const [tema, setTema] = useState(leerTema);
+  useEffect(() => {
+    document.documentElement.dataset.tema = tema;
+    try { localStorage.setItem('sv-tema', tema); } catch { /* sin almacenamiento */ }
+  }, [tema]);
+  const oscuro = tema === 'oscuro';
+  return (
+    <button type="button" className="tema" onClick={() => setTema(oscuro ? 'claro' : 'oscuro')}
+      aria-label={oscuro ? t('temaClaro') : t('temaOscuro')} title={oscuro ? t('temaClaro') : t('temaOscuro')}>
+      {oscuro ? (
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.5" /><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8" /></svg>
+      ) : (
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5a8.5 8.5 0 1 0 10.7 10.7z" /></svg>
+      )}
+    </button>
+  );
+}
+
 export default function Encabezado() {
   const { t, idioma, setIdioma } = useIdioma();
   return (
@@ -71,6 +96,7 @@ export default function Encabezado() {
         </nav>
         <div className="encabezado-der">
           <Buscador />
+          <BotonTema />
           <div className="idioma" role="group" aria-label={t('idioma')}>
             <button type="button" aria-pressed={idioma === 'es'} onClick={() => setIdioma('es')}>ES</button>
             <button type="button" aria-pressed={idioma === 'en'} onClick={() => setIdioma('en')}>EN</button>

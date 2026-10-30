@@ -25,21 +25,21 @@ function GraficaValor({ puntos, traspasos, idioma }) {
     <svg role="img" aria-label={`Valor de mercado de ${dinero(puntos[0][1])} a ${dinero(ultimo[1])}`} viewBox={`0 0 ${W} ${H}`} style={{ width: '100%', height: 'auto' }}>
       {marcas.map((m) => (
         <g key={m}>
-          <line x1={iz} x2={W - de} y1={y(m)} y2={y(m)} stroke={m === 0 ? '#DCE3DF' : '#EDF1EE'} />
-          <text x={iz - 8} y={y(m) + 4} textAnchor="end" fontSize="11" fill="#4F5D55">{dinero(Math.round(m))}</text>
+          <line x1={iz} x2={W - de} y1={y(m)} y2={y(m)} style={{ stroke: m === 0 ? 'var(--linea)' : 'var(--linea-suave)' }} />
+          <text x={iz - 8} y={y(m) + 4} textAnchor="end" fontSize="11" style={{ fill: 'var(--tenue)' }}>{dinero(Math.round(m))}</text>
         </g>
       ))}
       {anios.filter((_, i) => i % paso === 0).map((a) => (
-        <text key={a} x={x(`${a}-01-01`)} y={H - 14} textAnchor="middle" fontSize="11" fill="#4F5D55">{a}</text>
+        <text key={a} x={x(`${a}-01-01`)} y={H - 14} textAnchor="middle" fontSize="11" style={{ fill: 'var(--tenue)' }}>{a}</text>
       ))}
       {tr.map((r) => (
         <g key={r.f}>
-          <line x1={x(r.f)} x2={x(r.f)} y1={ar} y2={H - ab} stroke="#C2570F" strokeDasharray="4 4" />
-          <text x={x(r.f) - 4} y={ar + 10} textAnchor="end" fontSize="11" fill="#8A330A">{r.a} · {dinero(r.fee)}</text>
+          <line x1={x(r.f)} x2={x(r.f)} y1={ar} y2={H - ab} style={{ stroke: 'var(--naranja)' }} strokeDasharray="4 4" />
+          <text x={x(r.f) - 4} y={ar + 10} textAnchor="end" fontSize="11" style={{ fill: 'var(--naranja-osc)' }}>{r.a} · {dinero(r.fee)}</text>
         </g>
       ))}
-      <polyline points={linea} fill="none" stroke="#0A6640" strokeWidth="3" strokeLinejoin="round" strokeLinecap="round" />
-      <circle cx={x(ultimo[0])} cy={y(ultimo[1])} r="5" fill="#0A6640" />
+      <polyline points={linea} fill="none" style={{ stroke: 'var(--marca)' }} strokeWidth="3" strokeLinejoin="round" strokeLinecap="round" />
+      <circle cx={x(ultimo[0])} cy={y(ultimo[1])} r="5" style={{ fill: 'var(--marca)' }} />
     </svg>
   );
 }
@@ -115,7 +115,7 @@ export default function Jugador() {
           </div>
         </div>
         <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
-          <Link to="/simulador" className="boton">{t('simularFichaje')}</Link>
+          <Link to={`/simulador?j=${base.id}`} className="boton">{t('simularFichaje')}</Link>
         </div>
       </section>
 

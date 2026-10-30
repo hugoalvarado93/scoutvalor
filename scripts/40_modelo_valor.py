@@ -178,7 +178,8 @@ def main():
     REPORTES.mkdir(parents=True, exist_ok=True)
     cols = ["player_id", "valor_estimado", "brecha", "pred_log", "elegible_radar", "edad", "meses_contrato", "api_jugador",
             "minutos", "partidos", "goles", "asistencias", "calificacion", "pases_clave_90", "goles_90",
-            "asistencias_90", "entradas_90", "intercepciones_90", "pct_duelos"]
+            "asistencias_90", "entradas_90", "intercepciones_90", "pct_duelos", "tiros_90", "regates_exito_90",
+            "atajadas_90", "pct_titular", "sub_position"]
     cols = [c for c in cols if c in df.columns]
     if MUESTRAS:
         df[cols].to_csv(PROC / "valor.csv.gz", index=False)

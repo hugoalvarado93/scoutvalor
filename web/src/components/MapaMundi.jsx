@@ -19,13 +19,13 @@ const ANCHO = 960;
 const ALTO = 500;
 
 export function tono(n) {
-  if (n >= 800) return '#064A2E';
-  if (n >= 500) return '#0A6640';
-  if (n >= 300) return '#5E9C7C';
-  if (n >= 150) return '#9CC9B0';
-  if (n >= 50) return '#CDE5D7';
-  if (n > 0) return '#E3EFE8';
-  return '#E9ECEA';
+  if (n >= 800) return 'var(--m6)';
+  if (n >= 500) return 'var(--m5)';
+  if (n >= 300) return 'var(--m4)';
+  if (n >= 150) return 'var(--m3)';
+  if (n >= 50) return 'var(--m2)';
+  if (n > 0) return 'var(--m1)';
+  return 'var(--m0)';
 }
 
 export default function MapaMundi({ paises, modo, alElegir }) {
@@ -62,7 +62,7 @@ export default function MapaMundi({ paises, modo, alElegir }) {
           const etiqueta = a && a.tm.length ? a.tm.map((x) => paisTxt(x, idioma)).join(', ') : f.nombre;
           const activo = n > 0;
           return (
-            <path key={f.id || f.nombre} d={f.d} fill={tono(n)} className={activo ? 'activo' : ''}
+            <path key={f.id || f.nombre} d={f.d} style={{ fill: tono(n) }} className={activo ? 'activo' : ''}
               tabIndex={activo ? 0 : -1} role={activo ? 'link' : undefined}
               aria-label={activo ? `${etiqueta}: ${t('jugadoresN', { n: miles(n) })}` : undefined}
               onMouseMove={activo ? (e) => mover(e, { etiqueta, n }) : undefined}
