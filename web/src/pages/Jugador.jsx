@@ -76,7 +76,7 @@ export default function Jugador() {
   const liga = ligaPorId[base.lg];
   const vh = det?.vh || [];
   const vmax = vh.length ? Math.max(...vh.map((v) => v[1])) : base.vmax;
-  const temporadas = det?.ts || [];
+  const temporadas = (det?.ts || []).filter((s) => (s.minutos || 0) > 0);
   const traspasos = det?.tr || [];
 
   const val = (s, k) => {

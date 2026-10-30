@@ -138,6 +138,19 @@ def main():
     act["current_club_id"] = pd.to_numeric(act.current_club_id, errors="coerce")
     act["edad"] = ((HOY - pd.to_datetime(act.date_of_birth, errors="coerce")).dt.days / 365.25).round(1)
 
+    # ---- club actual: el traspaso mas reciente ya ocurrido manda sobre current_club_id
+    tr_all = transfers.copy()
+    tr_all["transfer_date"] = pd.to_datetime(tr_all.transfer_date, errors="coerce")
+    tr_all = tr_all[(tr_all.transfer_date <= HOY) & tr_all.player_id.isin(act.player_id)].sort_values("transfer_date")
+    ult_tr = tr_all.groupby("player_id").tail(1).set_index("player_id")
+    club_liga = dict(zip(pd.to_numeric(clubs.club_id, errors="coerce"), clubs.domestic_competition_id))
+    nuevo = act.player_id.map(ult_tr.to_club_id) if len(ult_tr) else pd.Series(np.nan, index=act.index)
+    nuevo = pd.to_numeric(nuevo, errors="coerce")
+    cambia = nuevo.notna() & nuevo.isin(club_liga.keys()) & (nuevo != act.current_club_id)
+    act.loc[cambia, "current_club_id"] = nuevo[cambia]
+    act.loc[cambia, "current_club_domestic_competition_id"] = nuevo[cambia].map(club_liga)
+    print(f"Club actualizado por traspaso reciente: {int(cambia.sum())} jugadores")
+
     # ---- confederacion por nacionalidad
     conf = {p: confederacion(p, c) for p, c in zip(countries.country_name, countries.confederation)}
 
@@ -215,8 +228,10 @@ def main():
         return [{"id": int(i), "n": r["name"], "cl": limpio(r.current_club_id), "p": POS.get(r.sub_position),
                  "e": limpio(r.edad), "v0": int(r.v0), "v1": int(r.v1), "pct": round(float(r.pct), 0)}
                 for i, r in df.iterrows()]
-    movimientos = {"fecha": vals.date.max(), "suben": mov(g.sort_values("delta", ascending=False).head(12)),
-                   "bajan": mov(g.sort_values("delta").head(12))}
+    g["lr"] = np.log(g.v1 / g.v0)
+    suben = g[g.v1 >= 2e6].sort_values("lr", ascending=False).head(12)
+    bajan = g[g.v0 >= 5e6].sort_values("lr").head(12)
+    movimientos = {"fecha": vals.date.max(), "suben": mov(suben), "bajan": mov(bajan)}
 
     # ---- detalle por jugador en fragmentos
     vals_a = vals[vals.player_id.isin(act.player_id)]
