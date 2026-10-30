@@ -5,7 +5,8 @@ on:
   push:
     branches: [main]
     paths:
-      - "scripts/**"
+      - "scripts/01_*.py"
+      - "scripts/02_*.py"
       - "requirements.txt"
       - ".github/workflows/datos.yml"
 

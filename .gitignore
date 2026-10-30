@@ -6,3 +6,6 @@ __pycache__/
 .wrangler/
 node_modules/
 data/procesado/
+web/node_modules/
+web/dist/
+web/public/data/

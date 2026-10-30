@@ -1,10 +1,18 @@
-name: Procesamiento
+name: Procesamiento y despliegue
 
 on:
   workflow_dispatch:
   workflow_run:
     workflows: ["Ingesta API-Football"]
     types: [completed]
+  push:
+    branches: [main]
+    paths:
+      - "web/**"
+      - "scripts/2*.py"
+      - "scripts/4*.py"
+      - "scripts/5*.py"
+      - ".github/workflows/procesar.yml"
 
 permissions:
   contents: write
@@ -12,12 +20,15 @@ permissions:
 
 concurrency:
   group: procesamiento
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   procesar:
     runs-on: ubuntu-latest
     timeout-minutes: 90
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -39,11 +50,40 @@ jobs:
           RUN=$(gh run list -w api_football.yml -s success -L 1 --json databaseId -q '.[0].databaseId')
           gh run download "$RUN" -n api-football -D data/api_football
 
-      - name: Vinculacion de jugadores
+      - name: Vinculacion, modelo y exportacion
         run: |
           mkdir -p data/reports
           set -o pipefail
-          python scripts/20_vinculacion.py 2>&1 | tail -60 > data/reports/log_procesamiento.txt
+          {
+            python scripts/20_vinculacion.py
+            python scripts/40_modelo_valor.py
+            FECHA_CORTE=$(date -u +%F) python scripts/50_exportar_portal.py
+          } 2>&1 | tail -80 > data/reports/log_procesamiento.txt
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Compilar portal
+        working-directory: web
+        run: |
+          set -o pipefail
+          npm install --no-audit --no-fund 2>&1 | tail -20 > ../data/reports/log_build.txt
+          npm run build 2>&1 | tail -60 >> ../data/reports/log_build.txt
+
+      - name: Publicar en Cloudflare Pages
+        run: |
+          set -o pipefail
+          npx --yes wrangler@4 pages project create scoutvalor --production-branch main >/dev/null 2>&1 || true
+          npx --yes wrangler@4 pages deploy web/dist --project-name scoutvalor --branch main --commit-dirty=true 2>&1 | tail -15 > data/reports/log_deploy.txt
+          for d in scoutvalor.app www.scoutvalor.app; do
+            curl -s -X POST "https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/pages/projects/scoutvalor/domains" \
+              -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" -H "Content-Type: application/json" \
+              --data "{\"name\":\"$d\"}" > /dev/null || true
+          done
+          curl -s "https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/pages/projects/scoutvalor/domains" \
+            -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
+            | python -c "import json,sys; d=json.load(sys.stdin); print('ok' if d.get('success') else d.get('errors')); [print(x['name'], x.get('status'), (x.get('verification_data') or {}).get('status'), (x.get('validation_data') or {}).get('status')) for x in (d.get('result') or [])]" >> data/reports/log_deploy.txt
 
       - name: Guardar reportes
         if: always()
@@ -51,9 +91,10 @@ jobs:
           git config user.name "scoutvalor-bot"
           git config user.email "actions@users.noreply.github.com"
           git add data/reports/
-          git diff --cached --quiet || (git commit -m "Actualiza reportes de procesamiento [skip ci]" && git pull --rebase -q && git push)
+          git diff --cached --quiet || (git commit -m "Actualiza reportes de procesamiento y despliegue [skip ci]" && git pull --rebase -q && git push)
 
       - uses: actions/upload-artifact@v4
+        if: always()
         with:
           name: procesado
           path: data/procesado
