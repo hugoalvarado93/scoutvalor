@@ -75,7 +75,3 @@ f_liga_orig    0.573
 Antes: f_liga_orig=inf, f_club_orig=inf, d_liga=inf, f_liga_dest=inf, f_club_dest=inf, d_club=inf
 Sin d_liga, d_club y edad2: log_valor=2.9, mov_local=2.7, f_liga_orig=2.6, mov_idioma=2.6, f_club_orig=2.4, min_antes=2.1
 Pares |rho| >= 0.7 en el modulo A: fuerza_liga~fuerza_club 0.78; minutos~partidos 0.85; goles_90~tiros_90 0.74
-
-real	0m13.095s
-user	0m15.224s
-sys	0m1.842s

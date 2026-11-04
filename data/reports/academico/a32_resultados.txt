@@ -65,7 +65,3 @@ hipotesis                                criterio         resultado  se sostiene
        H3 OR mismo idioma > 1 con IC sin cruzar 1 0.98 [0.89, 1.08]        False
        H4   Elevacion del quintil superior >= 1.5              2.31         True
        H5  Radar sube mas que el resto a 12 meses          +15.0 pp         True
-
-real	0m53.773s
-user	2m45.049s
-sys	0m2.503s

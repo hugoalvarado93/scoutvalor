@@ -54,7 +54,3 @@ Matriz de confusion [[VN, FP], [FN, VP]]: [[30494, 5604], [3307, 2847]]
 Entrenamiento 21,590 | prueba 20,662 | AUC prueba 0.742 | tasa real 0.129 vs predicha 0.162
 Traspasos por region destino: {'UEFA': 100.0}
 AUC por region destino: UEFA 0.746
-
-real	0m46.734s
-user	1m28.993s
-sys	0m3.800s

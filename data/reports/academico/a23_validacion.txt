@@ -26,10 +26,10 @@ INFO deriva min_antes: PSI 0.026
 3. Escalabilidad: tiempo de entrenamiento contra volumen de datos
 ==============================================================================
  fraccion  filas  segundos  seg_por_1000
-     0.25   3309     1.126         0.340
-     0.50   6618     1.256         0.190
-     0.75   9927     1.370         0.138
-     1.00  13237     1.448         0.109
+     0.25   3309     1.136         0.343
+     0.50   6618     1.269         0.192
+     0.75   9927     1.384         0.139
+     1.00  13237     1.460         0.110
 
 ==============================================================================
 4. Puertas de calidad del modelo (bloquean la publicacion si fallan)
@@ -60,7 +60,3 @@ tasa de exito plausible   PASA                                         14.6%
    AUC modulo C >= 0.70   PASA                                   AUC = 0.746
 
 17 de 17 pruebas pasan; se permite publicar
-
-real	0m16.298s
-user	0m26.519s
-sys	0m1.801s
