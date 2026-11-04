@@ -44,15 +44,38 @@ jobs:
           gh run download "$RUN" -n procesado -D data/procesado
           ls -la data/procesado
 
-      - name: Ejecutar analisis
+      - name: Preparar carpeta de resultados
+        run: mkdir -p data/reports/academico
+
+      - name: Actividad 1.2 - a12_requerimientos.py
+        if: always()
         working-directory: scripts/academico
-        run: |
-          mkdir -p ../../data/reports/academico
-          for s in a12_requerimientos a21_preparacion a22_seleccion a23_validacion a31_evaluacion a32_resultados; do
-            echo "### $s"
-            ( time python -u $s.py ) > ../../data/reports/academico/$s.txt 2>&1 || echo "FALLO $s" >> ../../data/reports/academico/$s.txt
-            tail -5 ../../data/reports/academico/$s.txt
-          done
+        run: python -u a12_requerimientos.py 2>&1 | tee ../../data/reports/academico/a12_requerimientos.txt
+
+      - name: Actividad 2.1 - a21_preparacion.py
+        if: always()
+        working-directory: scripts/academico
+        run: python -u a21_preparacion.py 2>&1 | tee ../../data/reports/academico/a21_preparacion.txt
+
+      - name: Actividad 2.2 - a22_seleccion.py
+        if: always()
+        working-directory: scripts/academico
+        run: python -u a22_seleccion.py 2>&1 | tee ../../data/reports/academico/a22_seleccion.txt
+
+      - name: Actividad 2.3 - a23_validacion.py
+        if: always()
+        working-directory: scripts/academico
+        run: python -u a23_validacion.py 2>&1 | tee ../../data/reports/academico/a23_validacion.txt
+
+      - name: Actividad 3.1 - a31_evaluacion.py
+        if: always()
+        working-directory: scripts/academico
+        run: python -u a31_evaluacion.py 2>&1 | tee ../../data/reports/academico/a31_evaluacion.txt
+
+      - name: Actividad 3.2 - a32_resultados.py
+        if: always()
+        working-directory: scripts/academico
+        run: python -u a32_resultados.py 2>&1 | tee ../../data/reports/academico/a32_resultados.txt
 
       - name: Guardar resultados
         if: always()
