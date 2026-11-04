@@ -1,0 +1,63 @@
+name: Analisis academico
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/academico/**"
+      - ".github/workflows/academico.yml"
+
+permissions:
+  contents: write
+  actions: read
+
+concurrency:
+  group: academico
+  cancel-in-progress: true
+
+jobs:
+  analisis:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -r requirements.txt matplotlib scipy
+
+      - name: Descargar Transfermarkt
+        run: |
+          mkdir -p data/raw/transfermarkt
+          curl -sSL -o data/raw/transfermarkt/transfermarkt-datasets.duckdb \
+            https://pub-e682421888d945d684bcae8890b0ec20.r2.dev/data/transfermarkt-datasets.duckdb
+
+      - name: Recuperar API-Football y datos procesados
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          RUN=$(gh run list -w api_football.yml -s success -L 1 --json databaseId -q '.[0].databaseId')
+          gh run download "$RUN" -n api-football -D data/api_football
+          RUN=$(gh run list -w procesar.yml -s success -L 1 --json databaseId -q '.[0].databaseId')
+          gh run download "$RUN" -n procesado -D data/procesado
+          ls -la data/procesado
+
+      - name: Ejecutar analisis
+        working-directory: scripts/academico
+        run: |
+          mkdir -p ../../data/reports/academico
+          for s in a12_requerimientos a21_preparacion a22_seleccion a23_validacion a31_evaluacion a32_resultados; do
+            echo "### $s"
+            ( time python -u $s.py ) > ../../data/reports/academico/$s.txt 2>&1 || echo "FALLO $s" >> ../../data/reports/academico/$s.txt
+            tail -5 ../../data/reports/academico/$s.txt
+          done
+
+      - name: Guardar resultados
+        if: always()
+        run: |
+          git config user.name "scoutvalor-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/reports/academico/
+          git diff --cached --quiet || (git commit -m "Resultados del analisis academico [skip ci]" && git pull --rebase -q && git push)
