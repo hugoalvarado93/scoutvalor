@@ -57,6 +57,6 @@ hip.        variable de respuesta  registros completitud     estado
   H4    tasa de exito del top 20%      42252     100.0 % suficiente
   H5   cambio de valor a 12 meses      41528     100.0 % suficiente
 
-real	0m12.800s
-user	0m12.372s
-sys	0m1.932s
+real	0m10.956s
+user	0m9.026s
+sys	0m1.695s

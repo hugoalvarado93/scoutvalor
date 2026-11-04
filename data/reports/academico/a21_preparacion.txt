@@ -30,7 +30,7 @@ Goles: totales vs por 90, correlacion con minutos: 0.33 -> 0.06
 ==============================================================================
 Ultima valuacion en la fuente: 2026-06-12 | antiguedad mediana de la valuacion vigente: 15 dias | > 365 dias: 1.7%
 Temporadas API-Football usadas por jugador: las 2 mas recientes de cada uno
-Temporada 2024: minutos Transfermarkt vs API-Football, 0 jugadores vinculados, Spearman nan, diferencia mediana nan min
+Temporada 2024: minutos Transfermarkt vs API-Football, 6,642 jugadores vinculados, Spearman 0.911, diferencia mediana 7 min
 
 ==============================================================================
 5. Muestreo estratificado (20%, estratos liga x grupo de posicion)
@@ -76,6 +76,6 @@ Antes: f_liga_orig=inf, f_club_orig=inf, d_liga=inf, f_liga_dest=inf, f_club_des
 Sin d_liga, d_club y edad2: log_valor=2.9, mov_local=2.7, f_liga_orig=2.6, mov_idioma=2.6, f_club_orig=2.4, min_antes=2.1
 Pares |rho| >= 0.7 en el modulo A: fuerza_liga~fuerza_club 0.78; minutos~partidos 0.85; goles_90~tiros_90 0.74
 
-real	0m17.887s
-user	0m20.758s
-sys	0m2.177s
+real	0m13.095s
+user	0m15.224s
+sys	0m1.842s

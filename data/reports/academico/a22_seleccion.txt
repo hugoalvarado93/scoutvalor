@@ -3,19 +3,19 @@
 1. Modulo A: candidatos para estimar log(valor) (5 particiones)
 ==============================================================================
                        modelo    R2  error_mediano_%  segundos
-Linea base (media de la liga) 0.390          111.114     0.005
-     Regresion Ridge (lineal) 0.783           51.783     0.078
-                Random Forest 0.794           48.454    44.348
-      Gradient Boosting (HGB) 0.833           42.958     3.449
+Linea base (media de la liga) 0.390          111.114     0.004
+     Regresion Ridge (lineal) 0.783           51.764     0.070
+                Random Forest 0.794           48.442    35.918
+      Gradient Boosting (HGB) 0.833           42.737     3.123
 
 ==============================================================================
 2. Modulo C: candidatos para P(exito del fichaje) (5 particiones estratificadas)
 ==============================================================================
                    modelo   AUC  Brier  segundos
-Linea base (tasa general) 0.500  0.124     0.028
- Regresion logistica (L2) 0.746  0.112     0.801
-            Random Forest 0.786  0.107    24.967
-  Gradient Boosting (HGB) 0.788  0.107     3.852
+Linea base (tasa general) 0.500  0.124     0.039
+ Regresion logistica (L2) 0.746  0.112     0.722
+            Random Forest 0.786  0.107    21.950
+  Gradient Boosting (HGB) 0.788  0.107     3.370
 
 ==============================================================================
 3. Modulo B: metrica de similitud (vecinos con la misma subposicion, top 10)
@@ -28,8 +28,8 @@ Azar (proporcion esperada): 0.120
 ==============================================================================
 4. Costo de reentrenamiento completo (una corrida)
 ==============================================================================
-Modulo A (HGB, 13,237 jugadores): 0.7 s | Modulo C (logistica, 42,252 traspasos): 0.10 s
+Modulo A (HGB, 13,237 jugadores): 0.6 s | Modulo C (logistica, 42,252 traspasos): 0.16 s
 
-real	1m31.603s
-user	5m2.588s
-sys	0m2.345s
+real	1m16.285s
+user	4m13.496s
+sys	0m2.312s
