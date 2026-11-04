@@ -52,9 +52,9 @@ c.titulo("1. Modulo A: candidatos para estimar log(valor) (5 particiones)")
 va = c.dataset_valor()
 X, y, cat = c.matriz_valor(va)
 Xi = X.fillna(X.median())
-Xoh = pd.get_dummies(
-    Xi, columns=[k for k, es in zip(X.columns, cat) if es], dtype=float
-)  # one-hot para lineales
+# one-hot para los modelos lineales
+cat_cols = [k for k, es in zip(X.columns, cat) if es]
+Xoh = pd.get_dummies(Xi, columns=cat_cols, dtype=float)
 Xs = ((Xoh - Xoh.mean()) / Xoh.std().replace(0, 1)).values
 base = (
     va.groupby("current_club_domestic_competition_id")

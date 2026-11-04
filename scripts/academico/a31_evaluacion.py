@@ -99,9 +99,9 @@ print(
     "R2 si faltan calificacion y produccion ofensiva:"
     f" {r2_score(y[te], m.predict(Xf)):.3f}"
 )
-Xs = X.drop(
-    columns=["max_relativo"]
-)  # max_relativo usa el valor actual: se prueba sin el (posible fuga)
+# max_relativo usa el valor actual: se prueba sin el
+# (posible fuga de informacion)
+Xs = X.drop(columns=["max_relativo"])
 ps = np.zeros(len(y))
 for a, b in KFold(5, shuffle=True, random_state=42).split(Xs):
     ps[b] = (
@@ -167,9 +167,9 @@ for C in [0.01, 0.1, 0.5, 2.0]:
     )
     if C == 0.5:
         p_lr = p
-corte = np.quantile(
-    p_lr, 0.80
-)  # regla de decision: recomendar el 20% con mayor probabilidad
+# regla de decision: recomendar el 20% con mayor
+# probabilidad estimada
+corte = np.quantile(p_lr, 0.80)
 yhat = (p_lr >= corte).astype(int)
 print(
     f"Umbral (top 20%) = {corte:.3f}: precision {precision_score(yt, yhat):.3f},"

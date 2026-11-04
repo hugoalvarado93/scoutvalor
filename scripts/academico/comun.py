@@ -70,9 +70,9 @@ def matriz_valor(df):
     X = df[num].apply(pd.to_numeric, errors="coerce").copy()
     for c in A.CATEG:
         X[c] = df[c].astype("category").cat.codes.replace(-1, np.nan)
-    X = X.loc[:, X.nunique(dropna=True) >= 2].astype(
-        "float64"
-    )  # tipos anulables de parquet -> float
+    X = X.loc[:, X.nunique(dropna=True) >= 2]
+    # tipos anulables de parquet -> float
+    X = X.astype("float64")
     return X, df.log_valor.values.astype(float), [c in A.CATEG for c in X.columns]
 
 
@@ -146,12 +146,10 @@ def dataset_traspasos():
     ].copy()
     S = tr.transfer_date.map(C.temporada_de)
     verano = tr.transfer_date.dt.month.isin([5, 6, 7, 8, 9])
-    tr["S_desp"], tr["S_antes"] = np.where(verano, S, S + 1), np.where(
-        verano, S - 1, S
-    )
-    tr["liga_dest"], tr["liga_orig"] = tr.to_club_id.map(
-        club_liga
-    ), tr.from_club_id.map(club_liga)
+    tr["S_desp"] = np.where(verano, S, S + 1)
+    tr["S_antes"] = np.where(verano, S - 1, S)
+    tr["liga_dest"] = tr.to_club_id.map(club_liga)
+    tr["liga_orig"] = tr.from_club_id.map(club_liga)
     ok = [(l, s) in cubiertas for l, s in zip(tr.liga_dest, tr.S_desp)]
     tr = tr[np.array(ok) & (tr.S_desp <= ult)].drop_duplicates(
         ["player_id", "transfer_date"]
@@ -193,9 +191,8 @@ def dataset_traspasos():
         for p, d in zip(tr.player_id, tr.transfer_date)
     ]
     tr["nac"], tr["g"] = tr.player_id.map(nac), tr.player_id.map(grp)
-    tr["pais_dest"], tr["pais_orig"] = tr.liga_dest.map(liga_pais), tr.liga_orig.map(
-        liga_pais
-    )
+    tr["pais_dest"] = tr.liga_dest.map(liga_pais)
+    tr["pais_orig"] = tr.liga_orig.map(liga_pais)
     tr["conf_dest"] = tr.pais_dest.map(conf_pais)
     tr["fee"] = pd.to_numeric(tr.transfer_fee, errors="coerce").fillna(0)
     tr["comp_n"] = [
@@ -208,12 +205,10 @@ def dataset_traspasos():
     # factores (tabla FEATS del modulo C)
     X = pd.DataFrame(index=tr.index)
     X["edad"], X["edad2"] = tr.edad, (tr.edad - 26) ** 2
-    X["log_valor"], X["log_fee"] = np.log(np.maximum(tr.v_en, 25000)), np.log1p(
-        tr.fee
-    )
-    X["min_antes"], X["sin_min_antes"] = tr.min_antes.fillna(
-        0
-    ) / 1000, tr.min_antes.isna().astype(float)
+    X["log_valor"] = np.log(np.maximum(tr.v_en, 25000))
+    X["log_fee"] = np.log1p(tr.fee)
+    X["min_antes"] = tr.min_antes.fillna(0) / 1000
+    X["sin_min_antes"] = tr.min_antes.isna().astype(float)
     X["f_liga_dest"] = tr.liga_dest.map(f_liga).fillna(piso_liga)
     X["f_liga_orig"] = tr.liga_orig.map(f_liga).fillna(piso_liga)
     X["d_liga"] = X.f_liga_dest - X.f_liga_orig
@@ -229,13 +224,11 @@ def dataset_traspasos():
         conf_pais.get(a) is not None and conf_pais.get(a) == conf_pais.get(b)
         for a, b in zip(tr.nac, tr.pais_dest)
     ])
-    X["mov_local"], X["mov_idioma"] = local.astype(float), (~local & idi).astype(
-        float
-    )
+    X["mov_local"] = local.astype(float)
+    X["mov_idioma"] = (~local & idi).astype(float)
     X["mov_conf"] = (~local & ~idi & cnf).astype(float)
-    X["compatriotas"], X["competencia"] = np.minimum(tr.comp_n, 5), np.minimum(
-        tr.compet_n, 4
-    )
+    X["compatriotas"] = np.minimum(tr.comp_n, 5)
+    X["competencia"] = np.minimum(tr.compet_n, 4)
     for gg in ["POR", "DEF", "MED", "DEL"]:
         X[f"g_{gg}"] = (tr.g == gg).astype(float)
     return tr, X[C.FEATS]

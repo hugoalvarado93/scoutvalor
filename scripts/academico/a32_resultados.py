@@ -49,9 +49,9 @@ for var, rejilla in [
     ("meses_contrato", [3, 12, 24, 36, 48, 60]),
 ]:
     Xp, prom = X.iloc[idx[k:]].copy(), []
-    for (
-        val
-    ) in rejilla:  # dependencia parcial: fija la variable y promedia la prediccion
+    # dependencia parcial: fija la variable y
+    # promedia la prediccion
+    for val in rejilla:
         Xp[var] = val
         prom.append(m.predict(Xp).mean())
     ef = np.exp(np.array(prom) - prom[0])

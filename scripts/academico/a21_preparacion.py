@@ -140,9 +140,9 @@ print(
 # 6. Relevancia de factores ----------------------------------------------------
 c.titulo("6. Relevancia: factores del valor (Spearman e informacion mutua)")
 X, y, _ = c.matriz_valor(va)
-num = X.drop(columns=[k for k in c.A.CATEG if k in X]).fillna(
-    X.median()
-)  # solo numericas
+# solo variables numericas
+num = X.drop(columns=[k for k in c.A.CATEG if k in X])
+num = num.fillna(X.median())
 mi = mutual_info_regression(num, y, random_state=0)
 rel = pd.DataFrame(
     {"spearman": [spearmanr(num[k], y)[0] for k in num], "info_mutua": mi},
