@@ -2,73 +2,34 @@
 ==============================================================================
 1. Modulo A: candidatos para estimar log(valor) (5 particiones)
 ==============================================================================
-Traceback (most recent call last):
-  File "/home/runner/work/scoutvalor/scoutvalor/scripts/academico/a22_seleccion.py", line 53, in <module>
-    r2, mae, seg = cv_reg(m, M, y, base)
-                   ^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/scoutvalor/scoutvalor/scripts/academico/a22_seleccion.py", line 23, in cv_reg
-    pred[te] = base[te] if modelo is None else modelo().fit(X[tr], y[tr]).predict(X[te])
-                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/sklearn/base.py", line 1403, in wrapper
-    return fit_method(estimator, *args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/sklearn/ensemble/_hist_gradient_boosting/gradient_boosting.py", line 447, in fit
-    X, known_categories = self._preprocess_X(X, reset=True)
-                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/sklearn/ensemble/_hist_gradient_boosting/gradient_boosting.py", line 297, in _preprocess_X
-    X = self._preprocessor.fit_transform(X)
-        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/sklearn/utils/_set_output.py", line 327, in wrapped
-    data_to_wrap = f(self, X, *args, **kwargs)
-                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/sklearn/base.py", line 1403, in wrapper
-    return fit_method(estimator, *args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/sklearn/compose/_column_transformer.py", line 977, in fit_transform
-    result = self._call_func_on_transformers(
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/sklearn/compose/_column_transformer.py", line 887, in _call_func_on_transformers
-    return Parallel(n_jobs=self.n_jobs)(jobs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/sklearn/utils/parallel.py", line 91, in __call__
-    return super().__call__(iterable_with_config_and_warning_filters)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/joblib/parallel.py", line 2012, in __call__
-    return output if self.return_generator else list(output)
-                                                ^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/joblib/parallel.py", line 1940, in _get_sequential_output
-    res = func(*args, **kwargs)
-          ^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/sklearn/utils/parallel.py", line 184, in __call__
-    return self.function(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/sklearn/pipeline.py", line 1566, in _fit_transform_one
-    res = transformer.fit_transform(X, y, **params.get("fit_transform", {}))
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/sklearn/utils/_set_output.py", line 327, in wrapped
-    data_to_wrap = f(self, X, *args, **kwargs)
-                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/sklearn/base.py", line 969, in fit_transform
-    return self.fit(X, **fit_params).transform(X)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/sklearn/utils/_set_output.py", line 327, in wrapped
-    data_to_wrap = f(self, X, *args, **kwargs)
-                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/sklearn/preprocessing/_function_transformer.py", line 254, in transform
-    out = self._transform(X, func=self.func, kw_args=self.kw_args)
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/sklearn/preprocessing/_function_transformer.py", line 381, in _transform
-    return func(X, **(kw_args if kw_args else {}))
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/sklearn/utils/validation.py", line 1038, in check_array
-    array = _asarray_with_order(array, order=order, dtype=dtype, xp=xp)
-            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/sklearn/utils/_array_api.py", line 983, in _asarray_with_order
-    array = numpy.asarray(array, order=order, dtype=dtype)
-            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-TypeError: float() argument must be a string or a real number, not 'NAType'
+                       modelo    R2  error_mediano_%  segundos
+Linea base (media de la liga) 0.390          111.114     0.005
+     Regresion Ridge (lineal) 0.783           51.783     0.078
+                Random Forest 0.794           48.454    44.348
+      Gradient Boosting (HGB) 0.833           42.958     3.449
 
-real	0m38.629s
-user	2m25.184s
-sys	0m0.622s
-FALLO a22_seleccion
+==============================================================================
+2. Modulo C: candidatos para P(exito del fichaje) (5 particiones estratificadas)
+==============================================================================
+                   modelo   AUC  Brier  segundos
+Linea base (tasa general) 0.500  0.124     0.028
+ Regresion logistica (L2) 0.746  0.112     0.801
+            Random Forest 0.786  0.107    24.967
+  Gradient Boosting (HGB) 0.788  0.107     3.852
+
+==============================================================================
+3. Modulo B: metrica de similitud (vecinos con la misma subposicion, top 10)
+==============================================================================
+euclidean  precision@10 misma subposicion: 0.417
+cosine     precision@10 misma subposicion: 0.419
+manhattan  precision@10 misma subposicion: 0.418
+Azar (proporcion esperada): 0.120
+
+==============================================================================
+4. Costo de reentrenamiento completo (una corrida)
+==============================================================================
+Modulo A (HGB, 13,237 jugadores): 0.7 s | Modulo C (logistica, 42,252 traspasos): 0.10 s
+
+real	1m31.603s
+user	5m2.588s
+sys	0m2.345s

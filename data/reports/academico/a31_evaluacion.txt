@@ -3,44 +3,56 @@
 1. Modulo A (HistGradientBoosting): metricas por particion
 ==============================================================================
  particion  R2_entren    R2  err_med_%  WMAPE_%
-         1      0.908 0.838     34.205   39.471
-         2      0.901 0.836     35.300   40.571
-         3      0.909 0.824     33.871   39.525
-         4      0.906 0.850     34.011   39.801
-         5      0.905 0.817     34.484   40.166
-Promedio R2 prueba 0.833 +/- 0.013 | brecha entrenamiento-prueba 0.073
-Global fuera de muestra: R2 0.833, err_med_% 34.427, WMAPE_% 39.921
+         1      0.900 0.839     33.598   39.681
+         2      0.895 0.835     35.130   40.824
+         3      0.900 0.823     34.785   39.308
+         4      0.906 0.850     34.011   39.802
+         5      0.903 0.818     34.543   39.951
+Promedio R2 prueba 0.833 +/- 0.013 | brecha entrenamiento-prueba 0.068
+Global fuera de muestra: R2 0.833, err_med_% 34.477, WMAPE_% 39.935
 
 ==============================================================================
 2. Regularizacion: efecto de l2, tamano minimo de hoja e iteraciones
 ==============================================================================
-l2=0.0  hoja=5   iter=600  R2 entren 0.903 | R2 prueba 0.832 | brecha 0.071
-l2=1.0  hoja=30  iter=600  R2 entren 0.906 | R2 prueba 0.833 | brecha 0.072
-l2=5.0  hoja=60  iter=600  R2 entren 0.906 | R2 prueba 0.834 | brecha 0.073
-l2=5.0  hoja=60  iter=200  R2 entren 0.899 | R2 prueba 0.833 | brecha 0.066
+l2=0.0  hoja=5   iter=600  R2 entren 0.904 | R2 prueba 0.832 | brecha 0.072
+l2=1.0  hoja=30  iter=600  R2 entren 0.901 | R2 prueba 0.833 | brecha 0.068
+l2=5.0  hoja=60  iter=600  R2 entren 0.906 | R2 prueba 0.834 | brecha 0.072
+l2=5.0  hoja=60  iter=200  R2 entren 0.899 | R2 prueba 0.834 | brecha 0.065
 
 ==============================================================================
 3. Robustez (ruido y datos faltantes) y consistencia entre semillas
 ==============================================================================
-Traceback (most recent call last):
-  File "/home/runner/work/scoutvalor/scoutvalor/scripts/academico/a31_evaluacion.py", line 58, in <module>
-    Xr[num] = Xr[num] + rng.normal(0, 0.10, Xr[num].shape) * Xr[num].std().values
-                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~
-  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/pandas/core/arrays/masked.py", line 846, in __array_ufunc__
-    result = arraylike.maybe_dispatch_ufunc_to_dunder_op(
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "pandas/_libs/ops_dispatch.pyx", line 113, in pandas._libs.ops_dispatch.maybe_dispatch_ufunc_to_dunder_op
-  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/pandas/core/ops/common.py", line 140, in new_method
-    return method(self, other)
-           ^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/pandas/core/arraylike.py", line 231, in __rmul__
-    return self._arith_method(other, roperator.rmul)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/pandas/core/arrays/masked.py", line 978, in _arith_method
-    raise NotImplementedError("can only perform ops with 1-d structures")
-NotImplementedError: can only perform ops with 1-d structures
+R2 limpio 0.842 | con ruido 10% desv 0.834
+R2 si faltan calificacion y produccion ofensiva: 0.826
+R2 con 5 semillas y particiones distintas: [0.832, 0.833, 0.835, 0.834, 0.833] | desv 0.0007
 
-real	0m19.866s
-user	0m36.148s
-sys	0m1.731s
-FALLO a31_evaluacion
+==============================================================================
+4. Sesgo: error mediano por region de la liga del jugador
+==============================================================================
+          jugadores  error_mediano  sesgo_medio_log
+region                                             
+AFC            1308         28.140           -0.018
+CONCACAF       1069         34.592            0.001
+CONMEBOL       1296         37.836           -0.001
+UEFA           8778         35.067            0.003
+sin dato        786         32.506           -0.009
+
+==============================================================================
+5. Modulo C (regresion logistica): AUC, Brier, precision, recall y F1
+==============================================================================
+C=0.01  AUC 0.7464 | Brier 0.1117
+C=0.1   AUC 0.7465 | Brier 0.1118
+C=0.5   AUC 0.7465 | Brier 0.1118
+C=2.0   AUC 0.7465 | Brier 0.1118
+Umbral (top 20%) = 0.214: precision 0.337, recall 0.463, F1 0.390
+Matriz de confusion [[VN, FP], [FN, VP]]: [[30494, 5604], [3307, 2847]]
+
+==============================================================================
+6. Generalizacion temporal: entrenar con traspasos <= 2021, probar con 2022 en adelante
+==============================================================================
+Entrenamiento 21,590 | prueba 20,662 | AUC prueba 0.742 | tasa real 0.129 vs predicha 0.162
+AUC por region destino: UEFA 0.746
+
+real	0m51.399s
+user	1m35.730s
+sys	0m2.288s
