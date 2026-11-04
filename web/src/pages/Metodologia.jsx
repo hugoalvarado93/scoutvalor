@@ -88,7 +88,7 @@ const C = {
     aucLr: 'Regresión logística (publicada)', aucGb: 'Gradient boosting (referencia)', aucExp: 'AUC: probabilidad de que el modelo califique más alto a un fichaje exitoso que a uno fallido (0.5 = azar, 1 = perfecto).',
     porQueLr: 'Publicamos la regresión logística aunque el gradient boosting acierta un poco más: es interpretable, permite mostrar cuánto aporta cada factor y corre en tu navegador.',
     calTitulo: '¿Las probabilidades son confiables? Calibración por deciles', calNota: 'Los traspasos se ordenan por probabilidad predicha y se dividen en 10 grupos iguales. Si el anillo y el punto coinciden, cuando el modelo dice 30% ocurre cerca de 30%.',
-    coefTitulo: 'Qué asocia el modelo con el éxito', coefNota: 'Coeficientes estandarizados: verde aumenta la probabilidad, naranja la reduce. Es correlación, no causalidad.',
+    coefTitulo: 'Qué asocia el modelo con el éxito', coefNota: 'Coeficientes estandarizados: verde aumenta la probabilidad, naranja la reduce. Es correlación, no causalidad. Se omite la variable de control «sin minutos registrados», que solo marca huecos de cobertura.',
     hallazgo: 'Hallazgo: una vez que se toman en cuenta la edad, los minutos, el monto y el nivel del club, compartir idioma o confederación casi no cambia la probabilidad. Lo que más pesa es cuánto se pagó y cuánto jugaba antes.',
     bTxt: 'Para cada club armamos su XI de referencia y, por cada puesto, buscamos el mejor reemplazo combinando cuatro criterios que puedes reponderar en la página.',
     xiRegla: 'XI de referencia: la formación más usada en sus últimos 15 partidos y, para cada puesto, el jugador del plantel actual con más minutos en una posición compatible.',
@@ -196,7 +196,7 @@ const C = {
     aucLr: 'Logistic regression (published)', aucGb: 'Gradient boosting (reference)', aucExp: 'AUC: the chance the model scores a successful signing above a failed one (0.5 = chance, 1 = perfect).',
     porQueLr: 'We publish the logistic regression even though gradient boosting is slightly more accurate: it is interpretable, lets us show how much each factor contributes, and runs in your browser.',
     calTitulo: 'Are the probabilities reliable? Calibration by decile', calNota: 'Transfers are sorted by predicted probability and split into 10 equal groups. When ring and dot meet, a 30% prediction happens about 30% of the time.',
-    coefTitulo: 'What the model associates with success', coefNota: 'Standardised coefficients: green raises the probability, orange lowers it. Correlation, not causation.',
+    coefTitulo: 'What the model associates with success', coefNota: 'Standardised coefficients: green raises the probability, orange lowers it. Correlation, not causation. The control variable “no minutes on record”, which only flags coverage gaps, is omitted.',
     hallazgo: 'Finding: once age, minutes, fee and club level are accounted for, sharing a language or confederation barely changes the probability. What matters most is how much was paid and how much he played before.',
     bTxt: 'For every club we build a reference XI and, for each position, look for the best replacement by combining four criteria you can re-weight on the page.',
     xiRegla: 'Reference XI: the most used formation in the last 15 matches and, for each position, the current squad player with the most minutes in a compatible position.',
@@ -420,7 +420,7 @@ export default function Metodologia() {
             <div className="fila-flex" style={{ gap: 20, alignItems: 'flex-start' }}>
               <div className="tarjeta relleno" style={{ flex: '2 1 560px', minWidth: 0 }}>
                 <h3 className="tarjeta-t" style={{ fontSize: 16 }}>{c.coberturaTitulo}</h3>
-                <BarrasH datos={v.por_liga.slice(0, 16).map(([k, , p]) => [nombreLiga(k), p])} max={100} formato={(x) => `${x.toFixed(1)}%`}
+                <BarrasH datos={v.por_liga.slice(0, 16).map(([k, , p]) => [nombreLiga(k), p]).sort((x, y) => y[1] - x[1])} max={100} formato={(x) => `${x.toFixed(1)}%`}
                   etiquetaCat={c.liga} etiquetaValor={c.pct} />
                 <p className="nota">{c.coberturaNota}</p>
               </div>
@@ -505,7 +505,7 @@ export default function Metodologia() {
               </div>
               <div className="tarjeta relleno" style={{ flex: '1 1 480px', minWidth: 0 }}>
                 <h3 className="tarjeta-t" style={{ fontSize: 16 }}>{c.coefTitulo}</h3>
-                <Divergente datos={f.coef.slice().reverse().map(([k, x]) => [VARS[idioma][k] || k, x])} formato={(x) => x.toFixed(2)}
+                <Divergente datos={f.coef.slice().reverse().filter(([k]) => k !== 'sin_min_antes').map(([k, x]) => [VARS[idioma][k] || k, x])} formato={(x) => x.toFixed(2)}
                   etiquetaCat={idioma === 'es' ? 'Variable' : 'Variable'} etiquetaValor={idioma === 'es' ? 'Coeficiente' : 'Coefficient'} />
                 <p className="nota">{c.coefNota}</p>
               </div>

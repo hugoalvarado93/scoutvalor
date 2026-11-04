@@ -48,7 +48,7 @@ export function BarrasH({ datos, formato = (v) => v, max, etiquetaValor = 'Valor
 
 // Barras divergentes alrededor de cero (polaridad): verde a la derecha, naranja a la izquierda, signo explicito.
 export function Divergente({ datos, formato = (v) => v.toFixed(2), etiquetaCat = '', etiquetaValor = '' }) {
-  const ancho = 680, iz = 230, de = 24, alto = 20, sep = 8;
+  const ancho = 560, iz = 210, de = 16, alto = 18, sep = 7;
   const m = Math.max(...datos.map((d) => Math.abs(d[1])), 0.0001);
   const H = datos.length * (alto + sep) + 8;
   const mitad = iz + (ancho - iz - de) / 2;
