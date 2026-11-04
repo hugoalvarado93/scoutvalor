@@ -26,10 +26,10 @@ INFO deriva min_antes: PSI 0.026
 3. Escalabilidad: tiempo de entrenamiento contra volumen de datos
 ==============================================================================
  fraccion  filas  segundos  seg_por_1000
-     0.25   3309     1.136         0.343
-     0.50   6618     1.269         0.192
-     0.75   9927     1.384         0.139
-     1.00  13237     1.460         0.110
+     0.25   3309     1.181         0.357
+     0.50   6618     1.230         0.186
+     0.75   9927     1.340         0.135
+     1.00  13237     1.466         0.111
 
 ==============================================================================
 4. Puertas de calidad del modelo (bloquean la publicacion si fallan)
