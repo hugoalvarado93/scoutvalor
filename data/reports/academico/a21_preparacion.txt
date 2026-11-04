@@ -1,0 +1,81 @@
+
+==============================================================================
+1. Calidad: universo bruto de jugadores activos
+==============================================================================
+Activos: 22,292 | duplicados por player_id: 0
+market_value_in_eur                     17.4
+date_of_birth                            0.0
+sub_position                             1.1
+current_club_domestic_competition_id    13.4
+contract_expiration_date                22.8
+height_in_cm                             8.0
+foot                                    12.4
+
+==============================================================================
+2. Limpieza: reglas aplicadas en cascada
+==============================================================================
+activos con valor > 0                      18,404
+edad entre 15 y 45                         18,403
+con >= 450 min recientes (modelo)          13,236
+con >= 900 min recientes (radar)           11,717
+
+==============================================================================
+3. Transformacion: asimetria del valor y normalizacion por 90 minutos
+==============================================================================
+Asimetria valor EUR: 6.99 -> log(valor): 0.44
+Goles: totales vs por 90, correlacion con minutos: 0.33 -> 0.06
+
+==============================================================================
+4. Consistencia temporal y contextual
+==============================================================================
+Ultima valuacion en la fuente: 2026-06-12 | antiguedad mediana de la valuacion vigente: 15 dias | > 365 dias: 1.7%
+Temporadas API-Football usadas por jugador: las 2 mas recientes de cada uno
+Temporada 2024: minutos Transfermarkt vs API-Football, 0 jugadores vinculados, Spearman nan, diferencia mediana nan min
+
+==============================================================================
+5. Muestreo estratificado (20%, estratos liga x grupo de posicion)
+==============================================================================
+Poblacion 13,237 | muestra 2,571 | estratos 128
+  log_valor     media pob    13.93 | media muestra    13.97 | KS p=0.872
+  edad          media pob    27.48 | media muestra    27.42 | KS p=0.854
+  minutos       media pob  2623.95 | media muestra  2627.04 | KS p=1.000
+  calificacion  media pob     6.69 | media muestra     6.69 | KS p=0.802
+  maxima diferencia de proporcion por grupo de posicion: 0.14 puntos
+
+==============================================================================
+6. Relevancia: factores del valor (Spearman e informacion mutua)
+==============================================================================
+                    spearman  info_mutua
+max_relativo          -0.289       0.786
+fuerza_club            0.738       0.526
+fuerza_liga            0.591       0.349
+meses_contrato         0.398       0.147
+edad                  -0.232       0.078
+minutos                0.272       0.054
+international_caps     0.190       0.053
+partidos               0.215       0.050
+calificacion           0.295       0.048
+asistencias_90         0.211       0.027
+pases_clave_90         0.170       0.024
+tiros_90               0.157       0.019
+
+Traspasos: AUC univariado de cada factor (0.5 = sin poder)
+log_fee        0.646
+log_valor      0.624
+min_antes      0.618
+f_club_orig    0.602
+d_club         0.587
+edad2          0.586
+d_liga         0.574
+f_liga_orig    0.573
+
+==============================================================================
+7. Colinealidad (VIF) en los factores de traspasos
+==============================================================================
+Antes: f_liga_orig=inf, f_club_orig=inf, d_liga=inf, f_liga_dest=inf, f_club_dest=inf, d_club=inf
+Sin d_liga, d_club y edad2: log_valor=2.9, mov_local=2.7, f_liga_orig=2.6, mov_idioma=2.6, f_club_orig=2.4, min_antes=2.1
+Pares |rho| >= 0.7 en el modulo A: fuerza_liga~fuerza_club 0.78; minutos~partidos 0.85; goles_90~tiros_90 0.74
+
+real	0m13.830s
+user	0m17.239s
+sys	0m1.818s

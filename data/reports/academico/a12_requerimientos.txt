@@ -1,0 +1,62 @@
+
+==============================================================================
+1. Inventario de fuentes (filas x columnas)
+==============================================================================
+Transfermarkt.players                50,149 x 26
+Transfermarkt.player_valuations     656,301 x  6
+Transfermarkt.transfers             175,165 x 10
+Transfermarkt.appearances         1,894,350 x 13
+Transfermarkt.games                  88,958 x 23
+Transfermarkt.clubs                     796 x 17
+API-Football.jugadores_temp      160,311 x 53   temporadas 2023-2026, ligas 50
+
+==============================================================================
+2. Modulo A: variable de respuesta y cobertura de factores (H1, H5)
+==============================================================================
+Jugadores elegibles (>= 450 min): 13,237
+Respuesta log(valor): media 13.93, desv 1.49, rango EUR 10,000 a 200,000,000
+    grupo de factores  variables  cobertura_%
+                 Edad          1        100.0
+                 Liga          3         98.1
+                 Club          2         50.0
+ Trayectoria de valor          1        100.0
+             Contrato          1         84.9
+   Selección nacional          1         75.3
+Minutos y titularidad          3         99.9
+         Calificación          1        100.0
+  Producción ofensiva          5         98.2
+ Producción defensiva          4         92.4
+    Físico y posición          3         98.1
+
+==============================================================================
+3. Modulo C: traspasos etiquetados y tipo de movimiento (H2, H3, H4)
+==============================================================================
+Traspasos etiquetados: 42,252 | temporadas destino 2012-2025 | tasa de exito 14.6%
+Con monto de traspaso > 0: 22.6% | con minutos previos: 56.7%
+                       traspasos  tasa_exito
+mov                                         
+misma confederacion         9354        16.7
+mismo idioma               11960        11.0
+mismo pais                 14690        14.9
+otro idioma y confed.       6248        17.3
+
+==============================================================================
+4. H5: valuaciones historicas disponibles para una retroprueba de 12 meses
+==============================================================================
+corte 2023-07-01: jugadores valuados 6m antes 23,778 | valuados 12m despues 22,285
+corte 2024-07-01: jugadores valuados 6m antes 18,500 | valuados 12m despues 18,048
+corte 2025-07-01: jugadores valuados 6m antes 17,783 | valuados 12m despues 19,280
+
+==============================================================================
+5. Hipotesis, variable de respuesta y estado de los datos
+==============================================================================
+hip.        variable de respuesta  registros completitud     estado
+  H1        log(valor de mercado)      13237     100.0 % suficiente
+  H2      exito del fichaje (0/1)      42252     100.0 % suficiente
+  H3 exito por tipo de movimiento      42252     100.0 % suficiente
+  H4    tasa de exito del top 20%      42252     100.0 % suficiente
+  H5   cambio de valor a 12 meses      41528     100.0 % suficiente
+
+real	0m9.193s
+user	0m8.931s
+sys	0m1.662s

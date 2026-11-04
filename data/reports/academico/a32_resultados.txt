@@ -1,0 +1,71 @@
+
+==============================================================================
+1. H1: importancia por permutacion (caida de R2) y dependencia parcial
+==============================================================================
+Club                     0.599
+Edad                     0.100
+Minutos y titularidad    0.079
+Liga                     0.077
+Trayectoria de valor     0.058
+Selección nacional       0.029
+Contrato                 0.021
+Calificación             0.010
+Producción ofensiva      0.006
+Físico y posición        0.004
+Producción defensiva     0.003
+Dependencia parcial de edad (x valor vs 19): 19: x1.00 | 22: x0.88 | 25: x0.88 | 28: x0.86 | 31: x0.76 | 34: x0.47
+Dependencia parcial de meses_contrato (x valor vs 3): 3: x1.00 | 12: x1.05 | 24: x1.14 | 36: x1.31 | 48: x1.49 | 60: x1.49
+
+==============================================================================
+2. H2 y H3: razones de momios (OR) con intervalo bootstrap al 95%
+==============================================================================
+                 OR  IC_inf  IC_sup          unidad
+mov_local     0.902   0.818   0.989           si/no
+mov_idioma    0.977   0.889   1.082           si/no
+mov_conf      0.902   0.819   0.982           si/no
+compatriotas  1.008   0.990   1.024  +1 compatriota
+log_fee       1.083   1.079   1.088   +1 log(monto)
+d_liga        0.916   0.898   0.934   +1 log fuerza
+min_antes     1.387   1.325   1.449       +1000 min
+edad          0.954   0.944   0.963          +1 ano
+Emparejamiento por 96 estratos: efecto de mismo idioma sobre la tasa de exito -2.8 puntos
+
+==============================================================================
+3. H4: tasa de exito por quintil de probabilidad estimada (elevacion sobre la tasa base)
+==============================================================================
+           traspasos  tasa_exito  elevacion
+q                                          
+Q1 (baja)       8451       0.033      0.223
+Q2              8450       0.063      0.435
+Q3              8450       0.114      0.781
+Q4              8450       0.182      1.248
+Q5 (alta)       8451       0.337      2.313
+Con presupuesto bajo (monto <= mediana): tasa base 0.117, regla top 20% 0.245
+
+==============================================================================
+4. H5: retroprueba del radar (valor a jul-2024, desempeno 2023/24, cambio a jul-2025)
+==============================================================================
+                         jugadores  cambio_mediano  suben
+grupo                                                    
+radar (decil 10)               317            0.00  0.328
+resto                         2530           -0.15  0.283
+sobrevaluados (decil 1)        317           -0.25  0.246
+
+==============================================================================
+5. Contraste externo: montos pagados entre jul-2024 y jul-2025
+==============================================================================
+Traspasos con monto: 681 | Spearman monto vs valor Transfermarkt 0.864 | vs valor estimado ScoutValor 0.820 | vs promedio de ambos 0.860
+
+==============================================================================
+Veredicto de las hipotesis
+==============================================================================
+hipotesis                                criterio         resultado  se sostiene
+       H1             R2 fuera de muestra >= 0.75             0.833         True
+       H2            AUC fuera de muestra >= 0.70             0.746         True
+       H3 OR mismo idioma > 1 con IC sin cruzar 1 0.98 [0.89, 1.08]        False
+       H4   Elevacion del quintil superior >= 1.5              2.31         True
+       H5  Radar sube mas que el resto a 12 meses          +15.0 pp         True
+
+real	0m52.486s
+user	2m39.658s
+sys	0m2.495s
