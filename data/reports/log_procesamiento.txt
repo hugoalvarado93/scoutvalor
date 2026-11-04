@@ -1,4 +1,3 @@
-|        265 |        1165 |             9.2 |
 |        242 |        1149 |             7   |
 |         95 |        1087 |            46.7 |
 |         79 |        1085 |            47.3 |
@@ -60,7 +59,7 @@ jugadores.json: 3.29 MB
 paises.json: 0.01 MB
 movimientos.json: 0.00 MB
 j/*.json: 49.05 MB
-{"fecha_datos": "2026-11-02", "corte_transfermarkt": "2026-06-12", "proxima": "2026-11-09", "jugadores": 22292, "ligas": 47, "equipos": 822, "con_valor_estimado": 13237}
+{"fecha_datos": "2026-11-04", "corte_transfermarkt": "2026-06-12", "proxima": "2026-11-09", "jugadores": 22292, "ligas": 47, "equipos": 822, "con_valor_estimado": 13237}
 Traspasos etiquetados: 42,252 | tasa de exito 0.146
 AUC logistica 0.746 | AUC gradient boosting 0.788
 modelo_c.json: 0.01 MB
@@ -78,3 +77,4 @@ min_ult.json: 0.22 MB
 - Regresion logistica (publicada): AUC 0.746, Brier 0.112
 - Gradient boosting (referencia): AUC 0.788, Brier 0.107
 
+{"resumen": {"fecha_datos": "2026-11-04", "corte_transfermarkt": "2026-06-12", "proxima": "2026-11-09", "jugadores": 22292, "ligas": 47, "equipos": 822, "con_valor_estimado": 13237}, "fuentes": {"transfermarkt": {"players": 50149, "player_valuations": 656301, "transfers": 175165, "appearances": 1894350, "game_lineups": 3179016, "games": 88958, "clubs": 796, "competitions": 65}, "api_football": {"jugadores_temporada": 160311, "plantillas_actuales": 26346, "traspasos": 339483, "equipos": 822, "ligas": 644}}, "vinculacion": {"tm": 50149, "af": 53622, "vinculados": 29053, "por_fecha": 28705, "por_nombre": 348, "activos": 22292, "activos_vinculados": 17791, "umbral": 0.62, "pesos": {"nombre": 0.55, "nacionalidad": 0.2, "club": 0.15, "estatura": 0.1}, "por_liga": [["ARG1", 954, 96.1], ["MLS1", 856, 94.0], ["GB1", 826, 92.4], ["IT1", 770, 88.1], ["ES1", 748, 89.3], ["JAP1", 740, 86.2], ["TR1", 726, 86.9], ["BRA1", 706, 93.3], ["MEX1", 674, 89.5], ["FR1", 673, 87.1], ["NL1", 645, 91.5], ["SER1", 636, 82.7], ["RO1", 630, 86.3], ["SA1", 616, 83.4], ["PO1", 615, 97.1], ["PL1", 615, 92.8], ["TS1", 615, 88.6], ["L1", 610, 93.8], ["UKR1", 610, 78.2], ["BE1", 567, 93.7], ["RU1", 560, 89.1], ["COL1", 550, 92.0], ["GR1", 515, 87.6], ["SE1", 457, 88.8], ["SC1", 453, 92.9], ["RSK1", 452, 78.3], ["C1", 435, 83.0], ["NO1", 424, 90.1], ["KR1", 421, 85.5], ["AUS1", 411, 79.8], ["A1", 400, 95.2], ["DK1", 396, 88.4]], "bandas": [["0.60-0.70", 364], ["0.70-0.80", 2134], ["0.80-0.90", 6038], ["0.90-1.00", 20517]], "ejemplos": [{"tm": "Germán Berterame", "af": "german berterame", "puntaje": 1.0, "s_nombre": 1.0, "s_pais": 1.0, "s_club": 1.0, "s_altura": 1.0, "metodo": "fecha"}, {"tm": "Savinho", "af": "savio moreira de oliveira", "puntaje": 0.682, "s_nombre": 0.453, "s_pais": 1.0, "s_club": 1.0, "s_altura": 0.833, "metodo": "fecha"}, {"tm": "Equi Fernández", "af": "ignacio ezequiel agustin fernandez carballo", "puntaje": 0.81, "s_nombre": 0.655, "s_pais": 1.0, "s_club": 1.0, "s_altura": 1.0, "metodo": "fecha"}, {"tm": "Matt Grimes", "af": "matthew jacob grimes", "puntaje": 0.87, "s_nombre": 0.793, "s_pais": 1.0, "s_club": 1.0, "s_altura": 0.833, "metodo": "fecha"}]}, "valor": {"n": 13237, "radar": 11718, "r2": 0.834, "r2_base": 0.407, "mae_pct": 43.1, "en_tope": 3.1, "importancia": [["Club", 0.6034], ["Edad", 0.0963], ["Minutos y titularidad", 0.0797], ["Liga", 0.0752], ["Trayectoria de valor", 0.0576], ["Selección nacional", 0.0298], ["Contrato", 0.0225], ["Calificación", 0.0107], [
