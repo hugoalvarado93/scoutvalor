@@ -60,6 +60,11 @@ print(f"R2 limpio {r2_score(y[te], m.predict(X.iloc[te])):.3f} | con ruido 10% d
 Xf = X.iloc[te].copy()
 Xf[["calificacion", "goles_90", "asistencias_90"]] = np.nan
 print(f"R2 si faltan calificacion y produccion ofensiva: {r2_score(y[te], m.predict(Xf)):.3f}")
+Xs = X.drop(columns=["max_relativo"])     # max_relativo usa el valor actual: se prueba sin el (posible fuga)
+ps = np.zeros(len(y))
+for a, b in KFold(5, shuffle=True, random_state=42).split(Xs):
+    ps[b] = hgb([k in c.A.CATEG for k in Xs.columns]).fit(Xs.iloc[a], y[a]).predict(Xs.iloc[b])
+print(f"R2 fuera de muestra sin max_relativo: {r2_score(y, ps):.3f} (con todas las variables {r2_score(y, pred):.3f})")
 r2s = []
 for s in range(5):
     p = np.zeros(len(y))
@@ -103,6 +108,7 @@ lr = LogisticRegression(C=0.5, max_iter=2000).fit(Z[viejo], yt[viejo])
 pn = lr.predict_proba(Z[nuevo])[:, 1]
 print(f"Entrenamiento {viejo.sum():,} | prueba {nuevo.sum():,} | AUC prueba {roc_auc_score(yt[nuevo], pn):.3f} "
       f"| tasa real {yt[nuevo].mean():.3f} vs predicha {pn.mean():.3f}")
+print("Traspasos por region destino:", (trs.conf_dest.fillna("sin dato").value_counts(normalize=True) * 100).round(1).to_dict())
 print("AUC por region destino:", ", ".join(f"{r} {roc_auc_score(yt[(trs.conf_dest == r).values], p_lr[(trs.conf_dest == r).values]):.3f}"
                                          for r in trs.conf_dest.value_counts().index[:5]
                                          if yt[(trs.conf_dest == r).values].std() > 0))

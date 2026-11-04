@@ -7,7 +7,7 @@ import pandas as pd
 from sklearn.ensemble import HistGradientBoostingRegressor
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import r2_score, roc_auc_score
-from sklearn.model_selection import cross_val_predict, StratifiedKFold
+from sklearn.model_selection import cross_val_predict, KFold, StratifiedKFold
 
 import comun as c
 
@@ -79,7 +79,8 @@ for frac in [0.25, 0.5, 0.75, 1.0]:
     n = int(len(X) * frac)
     t0 = time.time()
     HistGradientBoostingRegressor(max_iter=600, learning_rate=0.05, min_samples_leaf=30, l2_regularization=1.0,
-                                  categorical_features=cat, random_state=42).fit(X.values[:n], y[:n])
+                                  categorical_features=cat, early_stopping=False,   # mismas iteraciones en cada tamano
+                                  random_state=42).fit(X.values[:n], y[:n])
     filas.append([frac, n, time.time() - t0])
 esc = pd.DataFrame(filas, columns=["fraccion", "filas", "segundos"])
 esc["seg_por_1000"] = esc.segundos / esc.filas * 1000
@@ -89,7 +90,7 @@ print(esc.round(3).to_string(index=False))
 c.titulo("4. Puertas de calidad del modelo (bloquean la publicacion si fallan)")
 m = HistGradientBoostingRegressor(max_iter=600, learning_rate=0.05, min_samples_leaf=30, l2_regularization=1.0,
                                   categorical_features=cat, random_state=42)
-pred = cross_val_predict(m, X.values, y, cv=5)
+pred = cross_val_predict(m, X.values, y, cv=KFold(5, shuffle=True, random_state=42))
 r2 = r2_score(y, pred)
 registrar("R2 modulo A >= 0.75", r2 >= 0.75, f"R2 = {r2:.3f}")
 p = cross_val_predict(LogisticRegression(C=0.5, max_iter=2000), c.estandarizar(XT), tr.exito,

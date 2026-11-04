@@ -56,8 +56,8 @@ print(f"Temporadas API-Football usadas por jugador: las 2 mas recientes de cada 
 apps, games = c.tm("appearances"), c.tm("games")
 g = games[["game_id", "season", "competition_type"]].astype({"game_id": str})
 a = apps.astype({"game_id": str}).merge(g, on="game_id")
-a = a[a.competition_type == "domestic_league"]
-temp = int(pd.to_numeric(a.season).max()) - 1
+a = a[a.competition_type == "domestic_league"].assign(season=lambda d: pd.to_numeric(d.season))
+temp = int(a.season.max()) - 1
 mtm = a[a.season == temp].groupby("player_id").minutes_played.sum()
 af = c.A.leer(af="jugadores_temporada")
 af = af.assign(temporada=pd.to_numeric(af.temporada), minutos=pd.to_numeric(af.minutos, errors="coerce"))
