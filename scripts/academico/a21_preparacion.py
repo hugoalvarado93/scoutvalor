@@ -60,10 +60,12 @@ a = a[a.competition_type == "domestic_league"]
 temp = int(pd.to_numeric(a.season).max()) - 1
 mtm = a[a.season == temp].groupby("player_id").minutes_played.sum()
 af = c.A.leer(af="jugadores_temporada")
-maf = af[af.temporada == temp].assign(minutos=lambda d: pd.to_numeric(d.minutos, errors="coerce"))
-maf = maf.groupby("api_jugador").minutos.sum()
-vin = c.A.leer_vinculos()
-par = vin.assign(tm=vin.player_id.map(mtm), af=vin.api_jugador.map(maf)).dropna(subset=["tm", "af"])
+af = af.assign(temporada=pd.to_numeric(af.temporada), minutos=pd.to_numeric(af.minutos, errors="coerce"))
+maf = af[af.temporada == temp].groupby(pd.to_numeric(af.api_jugador)).minutos.sum()
+mtm.index = pd.to_numeric(mtm.index)
+vin = c.A.leer_vinculos().dropna(subset=["player_id", "api_jugador"])
+par = pd.DataFrame({"tm": pd.to_numeric(vin.player_id).map(mtm).values,
+                    "af": pd.to_numeric(vin.api_jugador).map(maf).values}).dropna()
 par = par[(par.tm > 0) & (par.af > 0)]
 print(f"Temporada {temp}: minutos Transfermarkt vs API-Football, {len(par):,} jugadores vinculados, "
       f"Spearman {spearmanr(par.tm, par.af)[0]:.3f}, diferencia mediana {(par.af - par.tm).abs().median():.0f} min")

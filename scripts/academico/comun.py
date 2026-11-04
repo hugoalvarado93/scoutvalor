@@ -61,8 +61,8 @@ def matriz_valor(df):
     X = df[num].apply(pd.to_numeric, errors="coerce").copy()
     for c in A.CATEG:
         X[c] = df[c].astype("category").cat.codes.replace(-1, np.nan)
-    X = X.loc[:, X.nunique(dropna=True) >= 2]
-    return X, df.log_valor.values, [c in A.CATEG for c in X.columns]
+    X = X.loc[:, X.nunique(dropna=True) >= 2].astype("float64")   # tipos anulables de parquet -> float
+    return X, df.log_valor.values.astype(float), [c in A.CATEG for c in X.columns]
 
 
 def dataset_traspasos():
