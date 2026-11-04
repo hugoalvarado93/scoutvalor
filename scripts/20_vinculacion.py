@@ -221,6 +221,32 @@ def reporte(tm, af, v) -> str:
     return "\n".join(out)
 
 
+def metricas(tm, af, v):
+    """Resumen numerico para la pagina de Metodologia."""
+    import json
+    ult = tm.last_season.max()
+    act = tm[tm.last_season == ult]
+    ok = act.player_id.isin(v.player_id)
+    por_liga = (act.assign(ok=ok).groupby("current_club_domestic_competition_id").ok.agg(["size", "mean"])
+                .sort_values("size", ascending=False).head(32))
+    bandas = pd.cut(v.puntaje, [0.6, 0.7, 0.8, 0.9, 1.01], labels=["0.60-0.70", "0.70-0.80", "0.80-0.90", "0.90-1.00"])
+    ejemplos = []
+    for nombre in ["Germán Berterame", "Savinho", "Equi Fernández", "Matt Grimes", "Hee-chan Hwang", "Kuni"]:
+        ej = v[v.nombre_tm == nombre]
+        if len(ej):
+            r = ej.iloc[0]
+            ejemplos.append({"tm": r.nombre_tm, "af": r.nombre_af, "puntaje": round(float(r.puntaje), 3),
+                             "s_nombre": round(float(r.s_nombre), 3), "s_pais": round(float(r.s_pais), 3),
+                             "s_club": round(float(r.s_club), 3), "s_altura": round(float(r.s_altura), 3), "metodo": r.metodo})
+    m = {"tm": int(len(tm)), "af": int(len(af)), "vinculados": int(len(v)),
+         "por_fecha": int((v.metodo == "fecha").sum()), "por_nombre": int((v.metodo == "nombre").sum()),
+         "activos": int(len(act)), "activos_vinculados": int(ok.sum()), "umbral": UMBRAL, "pesos": PESOS,
+         "por_liga": [[k, int(r["size"]), round(float(r["mean"]) * 100, 1)] for k, r in por_liga.iterrows()],
+         "bandas": [[str(k), int(n)] for k, n in v.groupby(bandas, observed=False).size().items()],
+         "ejemplos": ejemplos[:4]}
+    (PROC / "metricas_vinculacion.json").write_text(json.dumps(m, ensure_ascii=False), encoding="utf-8")
+
+
 def main():
     tm_raw, af_raw = cargar_tm(), cargar_af()
     if af_raw.empty:
@@ -235,6 +261,7 @@ def main():
         v.to_parquet(PROC / "vinculos.parquet", index=False)
     txt = reporte(tm, af, v)
     (REPORTES / "vinculacion.md").write_text(txt, encoding="utf-8")
+    metricas(tm, af, v)
     print(txt[:4000])
 
 

@@ -8,6 +8,7 @@ import Jugador from './pages/Jugador.jsx';
 import Proximamente from './pages/Proximamente.jsx';
 import Equipos from './pages/Equipos.jsx';
 import Simulador from './pages/Simulador.jsx';
+import Metodologia from './pages/Metodologia.jsx';
 
 function AlInicio() {
   const { pathname } = useLocation();
@@ -26,7 +27,7 @@ export default function App() {
         <Route path="/jugador/:id" element={<Jugador />} />
         <Route path="/equipos" element={<Equipos />} />
         <Route path="/simulador" element={<Simulador />} />
-        <Route path="/metodologia" element={<Proximamente modulo="metodologia" />} />
+        <Route path="/metodologia" element={<Metodologia />} />
         <Route path="*" element={<Proximamente modulo="noEncontrado" />} />
       </Routes>
       <Pie />

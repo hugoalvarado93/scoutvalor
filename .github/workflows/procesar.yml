@@ -13,6 +13,7 @@ on:
       - "scripts/4*.py"
       - "scripts/5*.py"
       - "scripts/6*.py"
+      - "scripts/7*.py"
       - ".github/workflows/procesar.yml"
 
 permissions:
@@ -60,6 +61,7 @@ jobs:
             python scripts/40_modelo_valor.py
             FECHA_CORTE=$(date -u +%F) python scripts/50_exportar_portal.py
             python scripts/60_modulos_bc.py
+            python scripts/70_metodologia.py
           } 2>&1 | tail -80 > data/reports/log_procesamiento.txt
 
       - uses: actions/setup-node@v4

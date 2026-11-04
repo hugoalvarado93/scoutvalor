@@ -318,7 +318,10 @@ def main():
               "mediana": [round(float(med[f]), 5) for f in FEATS], "tasa_base": round(float(y.mean()), 4),
               "auc": round(float(auc_lr), 3), "auc_gb": round(float(auc_gb), 3), "n": int(len(y)),
               "piso_liga": round(piso_liga, 4), "piso_club": round(piso_club, 4),
-              "idioma": IDIOMA, "conf": {k: v for k, v in conf_pais.items() if v}}
+              "idioma": IDIOMA, "conf": {k: v for k, v in conf_pais.items() if v},
+              "brier": round(float(bri_lr), 4), "brier_gb": round(float(bri_gb), 4),
+              "cal": [[round(float(r.prob_media), 3), round(float(r.tasa_real), 3), int(r.n)] for r in cal_t.itertuples()],
+              "temporadas": [int(d.S_desp.min()), int(d.S_desp.max())]}
 
     # ---------- contexto de clubes y ligas para inferencia
     act["g"] = act.p.map(GRUPO)

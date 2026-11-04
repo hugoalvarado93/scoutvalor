@@ -133,7 +133,46 @@ def entrenar(df: pd.DataFrame):
                                           categorical_features=cat_mask, random_state=42)
         m.fit(X.iloc[tr], y[tr])
         pred[te] = m.predict(X.iloc[te])
+    # importancia por permutacion en un 20% apartado (modelo entrenado con el otro 80%)
+    from sklearn.inspection import permutation_importance
+    rng = np.random.RandomState(1)
+    idx = rng.permutation(len(X)); corte = int(len(X) * 0.8)
+    m = HistGradientBoostingRegressor(max_iter=600, learning_rate=0.05, max_leaf_nodes=31, min_samples_leaf=30,
+                                      l2_regularization=1.0, categorical_features=cat_mask, random_state=42)
+    m.fit(X.iloc[idx[:corte]], y[idx[:corte]])
+    pi = permutation_importance(m, X.iloc[idx[corte:]], y[idx[corte:]], n_repeats=5, random_state=1, scoring="r2")
+    global IMPORTANCIA
+    IMPORTANCIA = dict(zip(X.columns, pi.importances_mean))
     return pred, num
+
+
+IMPORTANCIA = {}
+GRUPOS_VAR = {
+    "Edad": ["edad"], "Liga": ["fuerza_liga", "current_club_domestic_competition_id", "liga_rend"],
+    "Club": ["fuerza_club", "valor_plantilla_log"], "Trayectoria de valor": ["max_relativo"],
+    "Contrato": ["meses_contrato"], "Selección nacional": ["international_caps"],
+    "Minutos y titularidad": ["minutos", "partidos", "pct_titular"], "Calificación": ["calificacion"],
+    "Producción ofensiva": ["goles_90", "asistencias_90", "pases_clave_90", "tiros_90", "regates_exito_90"],
+    "Producción defensiva": ["entradas_90", "intercepciones_90", "pct_duelos", "atajadas_90"],
+    "Físico y posición": ["height_in_cm", "foot", "sub_position"],
+}
+
+
+def metricas(df):
+    import json
+    err = df.pred_log - df.log_valor
+    ss_tot = ((df.log_valor - df.log_valor.mean()) ** 2).sum()
+    base = df.groupby("current_club_domestic_competition_id").log_valor.transform("mean")
+    imp = {g: round(float(sum(IMPORTANCIA.get(c, 0) for c in cs)), 4) for g, cs in GRUPOS_VAR.items()}
+    muestra = df.sample(min(500, len(df)), random_state=3)
+    m = {"n": int(len(df)), "radar": int(df.elegible_radar.sum()),
+         "r2": round(float(1 - (err ** 2).sum() / ss_tot), 3),
+         "r2_base": round(float(1 - ((base - df.log_valor) ** 2).sum() / ss_tot), 3),
+         "mae_pct": round(float((np.exp(np.abs(err)) - 1).median() * 100), 1),
+         "en_tope": round(float((df.brecha >= 1.99).mean() * 100), 1),
+         "importancia": sorted(([k, v] for k, v in imp.items()), key=lambda x: -x[1]),
+         "dispersion": [[round(float(a), 3), round(float(b), 3)] for a, b in zip(muestra.log_valor, muestra.pred_log)]}
+    (PROC / "metricas_valor.json").write_text(json.dumps(m, ensure_ascii=False), encoding="utf-8")
 
 
 def reporte(df: pd.DataFrame, num: list[str]) -> str:
@@ -187,6 +226,7 @@ def main():
         df[cols].to_parquet(PROC / "valor.parquet", index=False)
     txt = reporte(df, num)
     (REPORTES / "modelo_valor.md").write_text(txt, encoding="utf-8")
+    metricas(df)
     print(txt)
 
 
