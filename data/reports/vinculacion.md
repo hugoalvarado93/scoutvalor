@@ -1,8 +1,8 @@
 # Vinculacion Transfermarkt <-> API-Football
 
 - Jugadores Transfermarkt: 50,149
-- Jugadores API-Football: 53,622
-- Vinculados: 29,053 (fecha: 28,705, nombre: 348)
+- Jugadores API-Football: 53,724
+- Vinculados: 29,056 (fecha: 28,708, nombre: 348)
 
 ## Cobertura por liga Transfermarkt (jugadores activos)
 
@@ -46,54 +46,54 @@
 |   api_liga |   jugadores |   pct_vinculado |
 |-----------:|------------:|----------------:|
 |        129 |        2100 |             5.4 |
-|         72 |        2008 |            22.5 |
-|        128 |        1698 |            64.2 |
-|        239 |        1647 |            44.9 |
-|        253 |        1636 |            66.3 |
-|         40 |        1623 |            51.2 |
-|        203 |        1592 |            85.7 |
-|        141 |        1539 |            42.8 |
-|        136 |        1519 |            46.7 |
-|         89 |        1356 |            41.1 |
+|         72 |        2022 |            22.8 |
+|        128 |        1701 |            64.1 |
+|        239 |        1646 |            44.4 |
+|        253 |        1632 |            66.2 |
+|         40 |        1628 |            51.2 |
+|        203 |        1603 |            85.6 |
+|        141 |        1544 |            42.9 |
+|        136 |        1519 |            46.5 |
+|         89 |        1352 |            40.9 |
 |        307 |        1327 |            57.3 |
-|         71 |        1305 |            63   |
-|        283 |        1299 |            62.3 |
-|        106 |        1289 |            65.2 |
-|        286 |        1267 |            64.3 |
-|         62 |        1227 |            42.8 |
-|         98 |        1207 |            65.5 |
-|        265 |        1165 |             9.2 |
-|        242 |        1149 |             7   |
-|         95 |        1088 |            46.9 |
-|         79 |        1085 |            47.3 |
-|        281 |        1080 |            10.6 |
-|        345 |        1063 |            68.6 |
-|        333 |        1059 |            81.3 |
-|        113 |        1046 |            64.5 |
-|        235 |        1034 |            84.4 |
-|        103 |        1001 |            55   |
-|        292 |         995 |            53.4 |
-|        197 |         987 |            85.2 |
-|        135 |         983 |            81.5 |
-|        144 |         966 |            80.8 |
-|        262 |         948 |            71   |
-|        270 |         934 |             7.7 |
-|         94 |         910 |            81   |
-|        140 |         901 |            78.9 |
-|         39 |         876 |            89   |
+|        283 |        1298 |            62.1 |
+|         71 |        1298 |            62.5 |
+|        106 |        1286 |            65.1 |
+|        286 |        1265 |            64.2 |
+|         62 |        1223 |            42.6 |
+|         98 |        1202 |            65.4 |
+|        265 |        1168 |             9.2 |
+|        242 |        1145 |             7.1 |
+|         95 |        1088 |            47   |
+|         79 |        1087 |            47.3 |
+|        281 |        1079 |            10.8 |
+|        345 |        1062 |            68.6 |
+|        333 |        1060 |            81.3 |
+|        113 |        1050 |            64.7 |
+|        235 |        1031 |            84.4 |
+|        103 |         994 |            54.6 |
+|        292 |         993 |            53.4 |
+|        197 |         992 |            85.2 |
+|        135 |         985 |            81.5 |
+|        144 |         983 |            80.7 |
+|        270 |         933 |             7.7 |
+|        263 |         925 |             6.9 |
+|         94 |         915 |            81.2 |
+|        140 |         896 |            78.7 |
+|        262 |         894 |            70.9 |
+|         39 |         870 |            89   |
 |        210 |         836 |            59.7 |
-|        179 |         835 |            87.4 |
-|         88 |         812 |            79.9 |
-|         61 |         808 |            79.1 |
-|        263 |         804 |             2.6 |
-|        207 |         709 |            65.2 |
-|        218 |         703 |            66.6 |
-|         78 |         692 |            84   |
+|        179 |         832 |            87.5 |
+|         88 |         816 |            80.1 |
+|         61 |         809 |            79.1 |
+|        207 |         709 |            65   |
+|        218 |         703 |            66.3 |
+|         78 |         691 |            83.8 |
+|        119 |         669 |            83.3 |
 |        250 |         666 |             3   |
-|        119 |         655 |            83.4 |
-|        188 |         635 |            72   |
-|        252 |         509 |            13.8 |
-|       1032 |          41 |             4.9 |
+|        188 |         643 |            71.7 |
+|        252 |         505 |            13.3 |
+|       1032 |          41 |             7.3 |
 |        268 |           8 |            75   |
 
 ## Distribucion de puntajes
@@ -101,36 +101,36 @@
 | puntaje     |   pares |
 |:------------|--------:|
 | (0.6, 0.7]  |     364 |
-| (0.7, 0.8]  |    2134 |
-| (0.8, 0.9]  |    6038 |
-| (0.9, 1.01] |   20517 |
+| (0.7, 0.8]  |    2164 |
+| (0.8, 0.9]  |    6045 |
+| (0.9, 1.01] |   20483 |
 
 ## Muestra para revision manual (zona dudosa 0.62-0.75)
 
-| nombre_tm           | nombre_af                   |   puntaje |   s_nombre |   s_pais |   s_club | metodo   |
-|:--------------------|:----------------------------|----------:|-----------:|---------:|---------:|:---------|
-| Christian Brüls     | christian bruls             |      0.75 |       1    |      0.5 |      0   | fecha    |
-| Moussa Kone         | kone kone                   |      0.72 |       0.95 |      0   |      1   | fecha    |
-| Djuro-Giulio Djekic | uro giulio ekic             |      0.73 |       0.6  |      1   |      1   | fecha    |
-| Sergiy Buletsa      | serhii buletsa              |      0.72 |       0.76 |      1   |      0   | fecha    |
-| Tomas Chory         | tomas chory                 |      0.72 |       1    |      0   |      0.5 | fecha    |
-| Eldar Mehmedovic    | eldar mehmedovic            |      0.68 |       1    |      0   |      0.5 | fecha    |
-| Lukas Moudry        | lukas moudry                |      0.68 |       1    |      0   |      0.5 | fecha    |
-| Ebrima Singhateh    | ebrima singhateh            |      0.7  |       1    |      0   |      1   | fecha    |
-| Bogdan Panchyshyn   | bohdan panchyshyn           |      0.75 |       0.81 |      1   |      0   | fecha    |
-| Young-jun Lee       | young jun lee               |      0.65 |       1    |      0   |      0   | fecha    |
-| Filip Panák         | filip panak                 |      0.72 |       1    |      0   |      0.5 | fecha    |
-| Will Alves          | william thomas alves        |      0.74 |       0.71 |      1   |      1   | fecha    |
-| Vladyslav Pryimak   | vladyslav pryymak           |      0.72 |       0.64 |      1   |      0.5 | fecha    |
-| Eun-su Lim          | eun su lim                  |      0.65 |       1    |      0   |      0   | fecha    |
-| Zak Vyner           | zachary george onyego vyner |      0.66 |       0.84 |      1   |      0   | fecha    |
-| Abdihakim Ali       | abdihakin abdulkadir ali    |      0.68 |       0.68 |      1   |      0   | fecha    |
-| Frederik Roslyng    | frederik roslyng            |      0.7  |       1    |      0.5 |      0   | fecha    |
-| Viktor Baier        | viktor baier                |      0.67 |       1    |      0   |      0.5 | fecha    |
-| Gor Manvelyan       | gor manvelyan               |      0.73 |       1    |      0   |      0.5 | fecha    |
-| Callum Osmand       | callum james osmand         |      0.72 |       0.95 |      0   |      1   | fecha    |
-| Aaron Gurd          | aaron bradley gurd          |      0.72 |       0.95 |      0   |      1   | fecha    |
-| Daniel Kerl         | daniel kerl                 |      0.68 |       1    |      0   |      0.5 | fecha    |
-| Sergiy Sten         | serhii sten                 |      0.68 |       0.51 |      1   |      1   | fecha    |
-| Tolaji Bola         | tolaji adeyinka osegie bola |      0.74 |       0.95 |      1   |      0   | fecha    |
-| Seung-woo Ryu       | seung woo ryu               |      0.65 |       1    |      0   |      0   | fecha    |
+| nombre_tm              | nombre_af                        |   puntaje |   s_nombre |   s_pais |   s_club | metodo   |
+|:-----------------------|:---------------------------------|----------:|-----------:|---------:|---------:|:---------|
+| Jaroslav Harustak      | jaroslav harustak                |      0.75 |       1    |        0 |      1   | fecha    |
+| Sefa Yilmaz            | sefa ylmaz                       |      0.68 |       0.69 |        1 |      0   | fecha    |
+| Aleksandr Silyanov     | aleksandr siljanov               |      0.73 |       0.65 |        1 |      0.5 | fecha    |
+| Sergiy Buletsa         | serhii buletsa                   |      0.72 |       0.76 |        1 |      0   | fecha    |
+| Min-jae Kim            | min jae kim                      |      0.72 |       1    |        0 |      0.5 | fecha    |
+| Andersson Ordóñez      | anderson rafael ordonez valdez   |      0.68 |       0.69 |        1 |      0   | fecha    |
+| Jan Stovicek           | jan stovicek                     |      0.68 |       1    |        0 |      0.5 | fecha    |
+| Filip Vecheta          | filip vecheta                    |      0.7  |       1    |        0 |      1   | fecha    |
+| Dimitrios Theodoridis  | dimitris theodoridis             |      0.75 |       0.9  |        1 |      0   | fecha    |
+| Vidar Ari Jónsson      | viar ari jonsson                 |      0.68 |       0.7  |        1 |      0   | fecha    |
+| Musa Barrow            | musa barrow                      |      0.72 |       1    |        0 |      0.5 | fecha    |
+| Vikentiy Voloshyn      | vikentii voloshyn                |      0.74 |       0.8  |        1 |      0   | fecha    |
+| Andy Carroll           | andrew thomas carroll            |      0.72 |       0.77 |        1 |      0   | fecha    |
+| Robin Wendin Thomasson | mats robin wendin thomasson      |      0.72 |       0.95 |        1 |      0   | fecha    |
+| Stepan Sebrle          | stepan sebrle                    |      0.67 |       1    |        0 |      0.5 | fecha    |
+| Kaiser                 | juan carlos lazaro cervera       |      0.66 |       0.75 |        1 |      0   | fecha    |
+| Ju-yeong Park          | ju yeong park                    |      0.7  |       1    |        0 |      1   | fecha    |
+| Jiri Pavlenka          | jiri pavlenka                    |      0.65 |       1    |        0 |      0   | fecha    |
+| Radek Vítek            | radek vitek                      |      0.73 |       1    |        0 |      0.5 | fecha    |
+| Mattie Pollock         | matthew william pollock          |      0.72 |       0.76 |        1 |      0   | fecha    |
+| Maiken González        | mayken eduardo gonzalez aldazoro |      0.72 |       0.63 |        1 |      0.5 | fecha    |
+| Stefan Gudelj          | stefan gudelj                    |      0.65 |       1    |        0 |      0   | fecha    |
+| Walter González        | walter rodrigo gonzalez sosa     |      0.72 |       0.95 |        1 |      0   | fecha    |
+| Tolaji Bola            | tolaji adeyinka osegie bola      |      0.74 |       0.95 |        1 |      0   | fecha    |
+| Kyu-hyun Park          | kyu hyun park                    |      0.65 |       1    |        0 |      0   | fecha    |

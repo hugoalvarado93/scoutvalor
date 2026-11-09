@@ -1,15 +1,15 @@
 
- ⛅️ wrangler 4.157.0
+ ⛅️ wrangler 4.158.0
 ────────────────────
-Uploading... (261/274)
-Uploading... (265/274)
-Uploading... (269/274)
+Uploading... (9/274)
+Uploading... (98/274)
+Uploading... (186/274)
 Uploading... (274/274)
-✨ Success! Uploaded 13 files (261 already uploaded) (2.81 sec)
+✨ Success! Uploaded 265 files (9 already uploaded) (3.67 sec)
 
 ✨ Uploading _headers
 🌎 Deploying...
-✨ Deployment complete! Take a peek over at https://7798dac6.scoutvalor.pages.dev
+✨ Deployment complete! Take a peek over at https://f1204a28.scoutvalor.pages.dev
 ok
 scoutvalor.app active active active
 www.scoutvalor.app active active active

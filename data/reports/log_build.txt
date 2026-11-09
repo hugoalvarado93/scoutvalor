@@ -1,5 +1,5 @@
 
-added 71 packages in 9s
+added 70 packages in 7s
 
 > scoutvalor-web@0.1.0 build
 > vite build
@@ -12,4 +12,4 @@ computing gzip size...
 [2mdist/[22m[32mindex.html                 [39m[1m[2m  1.09 kB[22m[1m[22m[2m │ gzip:   0.59 kB[22m
 [2mdist/[22m[2massets/[22m[35mindex-BX5DvrYw.css  [39m[1m[2m 24.11 kB[22m[1m[22m[2m │ gzip:   5.58 kB[22m
 [2mdist/[22m[2massets/[22m[36mindex-9vk0nj1K.js   [39m[1m[2m423.91 kB[22m[1m[22m[2m │ gzip: 144.79 kB[22m
-[32m✓ built in 1.38s[39m
+[32m✓ built in 1.80s[39m
