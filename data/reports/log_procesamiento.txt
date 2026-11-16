@@ -1,56 +1,56 @@
-|        242 |        1145 |             7.1 |
-|         95 |        1088 |            47   |
-|         79 |        1087 |            47.3 |
-|        281 |        1079 |            10.8 |
-|        345 |        1062 |            68.6 |
-|        333 |        1060 |            81.3 |
+|        242 |        1158 |             7.3 |
+|        281 |        1091 |            10.8 |
+|         79 |        1083 |            47   |
+|         95 |        1078 |            46.8 |
+|        345 |        1061 |            68.6 |
+|        333 |        1059 |            81.3 |
 |        113
 # Modelo de valor de mercado (modulo A)
 
-- Jugadores: 13,387 (con rendimiento de API-Football: 13,387)
+- Jugadores: 13,427 (con rendimiento de API-Football: 13,427)
 - Validacion cruzada 5 particiones, predicciones fuera de muestra
-- R2 en log(valor): **0.825** (linea base solo-liga: 0.403)
-- Error absoluto mediano: **43.8%** del valor
+- R2 en log(valor): **0.821** (linea base solo-liga: 0.403)
+- Error absoluto mediano: **44.4%** del valor
 
 ## Error por liga (top 15 por jugadores)
 
 | current_club_domestic_competition_id   |   jugadores |   error_mediano_pct |
 |:---------------------------------------|------------:|--------------------:|
-| ARG1                                   |         774 |                54.9 |
-| MLS1                                   |         645 |                47   |
-| GB1                                    |         579 |                46.5 |
-| IT1                                    |         541 |                48.7 |
-| BRA1                                   |         540 |                49.4 |
-| ES1                                    |         503 |                47.2 |
-| FR1                                    |         467 |                58.9 |
-| JAP1                                   |         457 |                30.2 |
-| L1                                     |         456 |                44   |
-| NL1                                    |         452 |                46.6 |
-| PO1                                    |         431 |                53.6 |
-| MEX1                                   |         430 |                49   |
-| TR1                                    |         422 |                50.4 |
-| PL1                                    |         422 |                40.4 |
-| COL1                                   |         420 |                33.6 |
+| ARG1                                   |         774 |                52.4 |
+| MLS1                                   |         645 |                47.9 |
+| GB1                                    |         580 |                45.1 |
+| IT1                                    |         541 |                48.2 |
+| BRA1                                   |         541 |                49.7 |
+| ES1                                    |         504 |                49.2 |
+| FR1                                    |         468 |                59.9 |
+| JAP1                                   |         457 |                29.2 |
+| NL1                                    |         455 |                54.6 |
+| L1                                     |         455 |                46.9 |
+| MEX1                                   |         433 |                49   |
+| PO1                                    |         432 |                62.5 |
+| COL1                                   |         423 |                33.7 |
+| PL1                                    |         422 |                41.9 |
+| TR1                                    |         422 |                54.7 |
 
 ## Top 15 infravalorados (todas las ligas, valor >= 500K)
 
-| name                | current_club_name     | sub_position       |   edad |   market_value_in_eur |   valor_estimado |   brecha |
-|:--------------------|:----------------------|:-------------------|-------:|----------------------:|-----------------:|---------:|
-| Pedro Santos        | FC Famalicão          | Right Winger       |     24 |                600000 |         1.8e+06  |      200 |
-| Paul Smyth          | Queens Park Rangers   | Right Winger       |     29 |                800000 |         2.4e+06  |      200 |
-| Ángel Sepúlveda     | CD Cruz Azul          | Centre-Forward     |     36 |                500000 |         1.5e+06  |      200 |
-| Lucas Jetten        | Ajax Amsterdam        | Left-Back          |     19 |                700000 |         2.1e+06  |      200 |
-| Joël van den Berg   | PSV Eindhoven         | Central Midfield   |     20 |               1500000 |         4.5e+06  |      200 |
-| Matteo Cocchi       | Inter Milan           | Left-Back          |     20 |               1500000 |         4.5e+06  |      200 |
-| Ariel Lassiter      | Portland Timbers      | Left Winger        |     32 |                500000 |         1.5e+06  |      200 |
-| Daniel Luna         | RCD Mallorca          | Attacking Midfield |     23 |                600000 |         1.8e+06  |      200 |
-| David Mokwa         | TSG 1899 Hoffenheim   | Centre-Forward     |     22 |               1000000 |         3e+06    |      200 |
-| Pathé Mboup         | Stade Brestois 29     | Left Winger        |     23 |               2500000 |         7.5e+06  |      200 |
-| Sabit Abdulai       | FC Alverca            | Defensive Midfield |     27 |                700000 |         2.1e+06  |      200 |
-| Dani van den Heuvel | Club Brugge KV        | Goalkeeper         |     23 |                800000 |         2.4e+06  |      200 |
-| Sofus Johannesen    | FC Midtjylland        | Central Midfield   |     19 |                550000 |         1.65e+06 |      200 |
-| Ahmed Abdullahi     | Sunderland AFC        | Centre-Forward     |     22 |                800000 |         2.4e+06  |      200 |
-| Caíque Gonçalves    | Esporte Clube Vitória | Defensive Midfield |     31 |                500000 |         1.5e+06  |      200 |
+| name             | current_club_name            | sub_position       |   edad |   market_value_in_eur |   valor_estimado |   brecha |
+|:-----------------|:-----------------------------|:-------------------|-------:|----------------------:|-----------------:|---------:|
+| Branimir Mlacic  | Udinese Calcio               | Centre-Back        |     20 |               5000000 |          1.5e+07 |      200 |
+| Massiré Sylla    | Union Saint-Gilloise         | Centre-Back        |     22 |                800000 |          2.4e+06 |      200 |
+| Noel Törnqvist   | Como 1907                    | Goalkeeper         |     25 |               2000000 |          6e+06   |      200 |
+| Oleksandr Yatsyk | Dynamo Kyiv                  | Central Midfield   |     24 |               1000000 |          3e+06   |      200 |
+| Shunsuke Saito   | KVC Westerlo                 | Right Winger       |     22 |               1300000 |          3.9e+06 |      200 |
+| Rodrigo Ribeiro  | Sporting CP                  | Centre-Forward     |     22 |               4000000 |          1.2e+07 |      200 |
+| Guillermo Varela | Clube de Regatas do Flamengo | Right-Back         |     34 |               1000000 |          3e+06   |      200 |
+| Pathé Mboup      | Stade Brestois 29            | Left Winger        |     23 |               2500000 |          7.5e+06 |      200 |
+| David Mokwa      | TSG 1899 Hoffenheim          | Centre-Forward     |     22 |               1000000 |          3e+06   |      200 |
+| Fabian Bredlow   | VfB Stuttgart                | Goalkeeper         |     32 |                700000 |          2.1e+06 |      200 |
+| Dermane Karim    | FC Lorient                   | Attacking Midfield |     23 |               2500000 |          7.5e+06 |      200 |
+| Mathis Lambourde | Hellas Verona                | Centre-Forward     |     21 |                800000 |          2.4e+06 |      200 |
+| Noah Ohio        | FC Utrecht                   | Centre-Forward     |     24 |               1000000 |          3e+06   |      200 |
+| Malthe Højholt   | Pisa Sporting Club           | Defensive Midfield |     26 |               1200000 |          3.6e+06 |      200 |
+| Miguel Reichmuth | FC Zürich                    | Central Midfield   |     23 |                500000 |          1.5e+06 |      200 |
 Club actualizado por traspaso reciente: 1439 jugadores
 resumen.json: 0.00 MB
 ligas.json: 0.00 MB
@@ -58,8 +58,8 @@ clubes.json: 0.05 MB
 jugadores.json: 3.29 MB
 paises.json: 0.01 MB
 movimientos.json: 0.00 MB
-j/*.json: 52.30 MB
-{"fecha_datos": "2026-11-09", "corte_transfermarkt": "2026-06-12", "proxima": "2026-11-16", "jugadores": 22292, "ligas": 47, "equipos": 838, "con_valor_estimado": 13387}
+j/*.json: 53.86 MB
+{"fecha_datos": "2026-11-16", "corte_transfermarkt": "2026-06-12", "proxima": "2026-11-23", "jugadores": 22292, "ligas": 47, "equipos": 840, "con_valor_estimado": 13427}
 Traspasos etiquetados: 42,252 | tasa de exito 0.146
 AUC logistica 0.746 | AUC gradient boosting 0.788
 modelo_c.json: 0.01 MB
@@ -77,4 +77,4 @@ min_ult.json: 0.22 MB
 - Regresion logistica (publicada): AUC 0.746, Brier 0.112
 - Gradient boosting (referencia): AUC 0.788, Brier 0.107
 
-{"resumen": {"fecha_datos": "2026-11-09", "corte_transfermarkt": "2026-06-12", "proxima": "2026-11-16", "jugadores": 22292, "ligas": 47, "equipos": 838, "con_valor_estimado": 13387}, "fuentes": {"transfermarkt": {"players": 50149, "player_valuations": 656301, "transfers": 175165, "appearances": 1894350, "game_lineups": 3179016, "games": 88958, "clubs": 796, "competitions": 65}, "api_football": {"jugadores_temporada": 175814, "plantillas_actuales": 28679, "traspasos": 341844, "equipos": 838, "ligas": 644}}, "vinculacion": {"tm": 50149, "af": 53724, "vinculados": 29056, "por_fecha": 28708, "por_nombre": 348, "activos": 22292, "activos_vinculados": 17792, "umbral": 0.62, "pesos": {"nombre": 0.55, "nacionalidad": 0.2, "club": 0.15, "estatura": 0.1}, "por_liga": [["ARG1", 954, 96.1], ["MLS1", 856, 94.0], ["GB1", 826, 92.4], ["IT1", 770, 88.1], ["ES1", 748, 89.3], ["JAP1", 740, 86.2], ["TR1", 726, 86.9], ["BRA1", 706, 93.3], ["MEX1", 674, 89.5], ["FR1", 673, 87.1], ["NL1", 645, 91.5], ["SER1", 636, 82.7], ["RO1", 630, 86.3], ["SA1", 616, 83.4], ["PO1", 615, 97.1], ["PL1", 615, 92.8], ["TS1", 615, 88.6], ["L1", 610, 93.8], ["UKR1", 610, 78.2], ["BE1", 567, 93.7], ["RU1", 560, 89.1], ["COL1", 550, 92.0], ["GR1", 515, 87.6], ["SE1", 457, 88.8], ["SC1", 453, 92.9], ["RSK1", 452, 78.3], ["C1", 435, 83.0], ["NO1", 424, 90.1], ["KR1", 421, 85.5], ["AUS1", 411, 79.8], ["A1", 400, 95.2], ["DK1", 396, 88.4]], "bandas": [["0.60-0.70", 364], ["0.70-0.80", 2164], ["0.80-0.90", 6045], ["0.90-1.00", 20483]], "ejemplos": [{"tm": "Germán Berterame", "af": "german berterame", "puntaje": 1.0, "s_nombre": 1.0, "s_pais": 1.0, "s_club": 1.0, "s_altura": 1.0, "metodo": "fecha"}, {"tm": "Savinho", "af": "savio moreira de oliveira", "puntaje": 0.682, "s_nombre": 0.453, "s_pais": 1.0, "s_club": 1.0, "s_altura": 0.833, "metodo": "fecha"}, {"tm": "Equi Fernández", "af": "ignacio ezequiel agustin fernandez carballo", "puntaje": 0.81, "s_nombre": 0.655, "s_pais": 1.0, "s_club": 1.0, "s_altura": 1.0, "metodo": "fecha"}, {"tm": "Matt Grimes", "af": "matthew jacob grimes", "puntaje": 0.87, "s_nombre": 0.793, "s_pais": 1.0, "s_club": 1.0, "s_altura": 0.833, "metodo": "fecha"}]}, "valor": {"n": 13387, "radar": 12022, "r2": 0.825, "r2_base": 0.403, "mae_pct": 43.8, "en_tope": 3.6, "importancia": [["Club", 0.5829], ["Edad", 0.0893], ["Liga", 0.0786], ["Minutos y titularidad", 0.069], ["Trayectoria de valor", 0.0543], ["Selección nacional", 0.0315], ["Contrato", 0.0243], ["Calificación", 0.0111], ["
+{"resumen": {"fecha_datos": "2026-11-16", "corte_transfermarkt": "2026-06-12", "proxima": "2026-11-23", "jugadores": 22292, "ligas": 47, "equipos": 840, "con_valor_estimado": 13427}, "fuentes": {"transfermarkt": {"players": 50149, "player_valuations": 656301, "transfers": 175165, "appearances": 1894350, "game_lineups": 3179016, "games": 88958, "clubs": 796, "competitions": 65}, "api_football": {"jugadores_temporada": 183679, "plantillas_actuales": 29630, "traspasos": 342722, "equipos": 840, "ligas": 644}}, "vinculacion": {"tm": 50149, "af": 53763, "vinculados": 29056, "por_fecha": 28708, "por_nombre": 348, "activos": 22292, "activos_vinculados": 17792, "umbral": 0.62, "pesos": {"nombre": 0.55, "nacionalidad": 0.2, "club": 0.15, "estatura": 0.1}, "por_liga": [["ARG1", 954, 96.1], ["MLS1", 856, 94.0], ["GB1", 826, 92.4], ["IT1", 770, 88.1], ["ES1", 748, 89.3], ["JAP1", 740, 86.2], ["TR1", 726, 86.9], ["BRA1", 706, 93.3], ["MEX1", 674, 89.5], ["FR1", 673, 87.1], ["NL1", 645, 91.5], ["SER1", 636, 82.7], ["RO1", 630, 86.3], ["SA1", 616, 83.4], ["PO1", 615, 97.1], ["PL1", 615, 92.8], ["TS1", 615, 88.6], ["L1", 610, 93.8], ["UKR1", 610, 78.2], ["BE1", 567, 93.7], ["RU1", 560, 89.1], ["COL1", 550, 92.0], ["GR1", 515, 87.6], ["SE1", 457, 88.8], ["SC1", 453, 92.9], ["RSK1", 452, 78.3], ["C1", 435, 83.0], ["NO1", 424, 90.1], ["KR1", 421, 85.5], ["AUS1", 411, 79.8], ["A1", 400, 95.2], ["DK1", 396, 88.4]], "bandas": [["0.60-0.70", 362], ["0.70-0.80", 2105], ["0.80-0.90", 6100], ["0.90-1.00", 20489]], "ejemplos": [{"tm": "Germán Berterame", "af": "german berterame", "puntaje": 1.0, "s_nombre": 1.0, "s_pais": 1.0, "s_club": 1.0, "s_altura": 1.0, "metodo": "fecha"}, {"tm": "Savinho", "af": "savio moreira de oliveira", "puntaje": 0.682, "s_nombre": 0.453, "s_pais": 1.0, "s_club": 1.0, "s_altura": 0.833, "metodo": "fecha"}, {"tm": "Equi Fernández", "af": "ignacio ezequiel agustin fernandez carballo", "puntaje": 0.81, "s_nombre": 0.655, "s_pais": 1.0, "s_club": 1.0, "s_altura": 1.0, "metodo": "fecha"}, {"tm": "Matt Grimes", "af": "matthew jacob grimes", "puntaje": 0.87, "s_nombre": 0.793, "s_pais": 1.0, "s_club": 1.0, "s_altura": 0.833, "metodo": "fecha"}]}, "valor": {"n": 13427, "radar": 12101, "r2": 0.821, "r2_base": 0.403, "mae_pct": 44.4, "en_tope": 3.6, "importancia": [["Club", 0.5645], ["Liga", 0.0852], ["Edad", 0.0849], ["Minutos y titularidad", 0.0618], ["Trayectoria de valor", 0.0554], ["Selección nacional", 0.0324], ["Contrato", 0.026], ["Calificación", 0.0104], ["
