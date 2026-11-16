@@ -1,6 +1,11 @@
 name: Analisis academico (complementos)
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/academico_complementos.yml"
+      - "scripts/academico/a33_complementos.py"
   workflow_dispatch:
     inputs:
       run_api:
@@ -36,8 +41,8 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh run download "${{ inputs.run_api }}" -n api-football -D data/api_football
-          gh run download "${{ inputs.run_procesado }}" -n procesado -D data/procesado
+          gh run download "${{ inputs.run_api || '41428190475' }}" -n api-football -D data/api_football
+          gh run download "${{ inputs.run_procesado || '41755740470' }}" -n procesado -D data/procesado
           mkdir -p data/reports/academico
 
       - name: Complementos - a33_complementos.py
